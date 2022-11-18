@@ -28,15 +28,15 @@
     font-weight: 600;
     cursor: pointer;
     align-items: center;
-    justify-content: center;
-
+    justify-content: center;    
+    }
     .icon{
         font-size:25px;
         color: var(--PrimaryColor);
         transform: translateY(5px);
     }
 
-    }
+    
 
     @media screen and (max-width:768px) {
     .navBar{

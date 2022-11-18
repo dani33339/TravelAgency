@@ -30,7 +30,7 @@
   align-items: center;
   justify-content: center;
 }
-.header .logo .icon {
+.header .icon {
   font-size: 25px;
   color: var(--PrimaryColor);
   transform: translateY(5px);
