@@ -1,7 +1,8 @@
 import React from "react";
 import './home.css'
-import video from '../../Assets/video3.mp4'
+import video from '../../Assets/video1.mp4'
 import {GrLocation} from 'react-icons/gr'
+import {HiFilter} from 'react-icons/hi'
 
 const Home = () => {
     return (
@@ -20,6 +21,7 @@ const Home = () => {
                     </h1>
 
                 </div>
+
                 <div className="cardDiv grid">
 
                     <div className="destinationInput">
@@ -47,12 +49,14 @@ const Home = () => {
                         </div>
                     </div>
 
-
+                    <div className="rearchOption flex">
+                        <HiFilter className="icon"/>
+                        <span>MORE FILTER</span>
+                    </div>
                 </div>
+                
             </div>
-
-          
-
+           
         </section>
     )
 }
