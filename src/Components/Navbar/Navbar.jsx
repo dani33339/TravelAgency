@@ -4,6 +4,7 @@ import { MdAirplaneTicket } from "react-icons/md"
 import { AiFillCloseCircle } from "react-icons/ai"
 import { TbGridDots } from "react-icons/tb"
 import { useState } from 'react';
+import {Link} from 'react-router-dom'
 
 
 const Navbar = () => {
@@ -24,13 +25,13 @@ const Navbar = () => {
             <header className="header flex">
 
                 <div className="logoDiv">
-                    <a href="#" className="logo">
+                    <Link to="/" className="logo">
                         <h1><MdAirplaneTicket className="icon" />Travel.</h1>
-                    </a>
+                    </Link>
                 </div>
 
                 <div className={active}>
-                    <ul className="navlists flex">
+                    <ul onClick={removeNavbar} className="navLists flex">
 
                         <li className="navItem">
                             <a href="#" className="navLink">Home</a>
@@ -57,7 +58,7 @@ const Navbar = () => {
                         </li>
 
                         <button className="btn">
-                            <a href="#">Sing-up</a>
+                            <Link to="/Sing-up">Sing-up</Link>
                         </button>
                     </ul>
 

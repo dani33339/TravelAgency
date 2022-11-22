@@ -48,8 +48,8 @@ const Home = () => {
             </div>
           </div>
 
-{/* price range */}
-          {/* <div className="priceInput">
+          {/* price range */}
+          <div className="priceInput">
             <div className="label_total flex">
             <label htmlFor="city">Max price:</label>
             <h3 className="total">$5000</h3>
@@ -57,7 +57,7 @@ const Home = () => {
             <div className="input flex">
               <input type="range" max="5000" min="1000" />
             </div>
-          </div> */}
+          </div>
 
           <div className="searchOptions flex">
            <HiFilter className="icon"/>

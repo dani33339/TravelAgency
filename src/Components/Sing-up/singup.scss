@@ -3,13 +3,15 @@
     --SecondaryColor: hsl(187, 85%, 43%);
     --gradientColor: linear-gradient(to right, hsl(187, 85%, 43%),hsl(199, 100%, 33%));
     --whiteColor: hsl(0, 0%, 100%);
+    --blackColor: hsl(201, 33%, 16%);
     --textColor: hsl(240, 4%, 36%);
     --whiteColorDeam: hsl(0, 0%, 93%);
     --greyText: rgb(190, 190, 190);
     --inputColor: rgb(239, 239, 239);
 }
 
-.home{
+
+.Sing-up{
     width: 100%;
     position: relative;
     display: flex;
@@ -37,7 +39,7 @@
         object-fit: cover;
     }
 
-    .homeContent{
+    .Sing-upContent{
         width: 100%;
         height: max-content;
         padding: 8rem 1.5rem 3rem;
@@ -57,7 +59,7 @@
             text-transform: uppercase;
         } 
 
-        .homeTitle{
+        .Sing-upTitle{
             position: relative;
             font-size: 1.8rem;
         }
@@ -121,7 +123,7 @@
         }    
            
 
-            .searchOptions{
+            .submit{
                 position: absolute;
                 background: var(--gradientColor);
                 width: max-content;
@@ -221,7 +223,7 @@
                 }
 
             }
-            .rearchOption{
+            .submit{
                 position: absolute;
                 background: var(--gradientColor);
                 width: max-content;
@@ -254,14 +256,14 @@
 
 //MEDIA QUERIES ==========================================>
 @media screen and (min-width: 500px){
-   .home{
-        .homeContent{
+   .Sing-up{
+        .Sing-upContent{
             .textDiv{
                 .smallText{
                     font-size: 16px;
                 } 
     
-                .homeTitle{
+                .Sing-upTitle{
                     position: relative;
                     font-size: 2.3rem;
                     width: max-content;
@@ -289,8 +291,8 @@
 }
 
 @media screen and (min-width: 660px) {
-    .home{
-        .homeContent{
+    .Sing-up{
+        .Sing-upContent{
             .cardDiv{
                 padding: 2rem 1rem;
                 grid-template-columns: repeat(3,1fr);
@@ -301,15 +303,15 @@
 
 
 @media screen and (min-width: 940px){
-   .home{
+   .Sing-up{
         height: 70vh;
     }
 }
 
 @media screen and (min-width: 1024px){
-    .home{
+    .Sing-up{
         height: 80vh;
-        .homeContent{
+        .Sing-upContent{
             padding-left: 0;
             padding-right: 0;
             .cardDiv{

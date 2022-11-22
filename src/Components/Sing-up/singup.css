@@ -3,13 +3,14 @@
   --SecondaryColor: hsl(187, 85%, 43%);
   --gradientColor: linear-gradient(to right, hsl(187, 85%, 43%),hsl(199, 100%, 33%));
   --whiteColor: hsl(0, 0%, 100%);
+  --blackColor: hsl(201, 33%, 16%);
   --textColor: hsl(240, 4%, 36%);
   --whiteColorDeam: hsl(0, 0%, 93%);
   --greyText: rgb(190, 190, 190);
   --inputColor: rgb(239, 239, 239);
 }
 
-.home {
+.Sing-up {
   width: 100%;
   position: relative;
   display: flex;
@@ -17,7 +18,7 @@
   justify-content: center;
   margin: auto;
 }
-.home .overlay {
+.Sing-up .overlay {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -27,7 +28,7 @@
   bottom: 0;
   z-index: 1;
 }
-.home video {
+.Sing-up video {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -36,7 +37,7 @@
   -o-object-fit: cover;
      object-fit: cover;
 }
-.home .homeContent {
+.Sing-up .Sing-upContent {
   width: 100%;
   height: -webkit-max-content;
   height: -moz-max-content;
@@ -51,47 +52,47 @@
   color: var(--whiteColor);
   z-index: 100;
 }
-.home .homeContent .textDiv {
+.Sing-up .Sing-upContent .textDiv {
   padding: 2rem e0;
 }
-.home .homeContent .textDiv .smallText {
+.Sing-up .Sing-upContent .textDiv .smallText {
   font-size: 13px;
   text-transform: uppercase;
 }
-.home .homeContent .textDiv .homeTitle {
+.Sing-up .Sing-upContent .textDiv .Sing-upTitle {
   position: relative;
   font-size: 1.8rem;
 }
-.home .homeContent .cardDiv {
+.Sing-up .Sing-upContent .cardDiv {
   position: relative;
   padding: 2rem 1rem;
   background: var(--whiteColor);
   border-radius: 10px;
   gap: 1rem;
 }
-.home .homeContent .cardDiv label {
+.Sing-up .Sing-upContent .cardDiv label {
   display: block;
   color: var(--textColor);
   padding-bottom: 10px;
   font-size: 13px;
   font-weight: 500;
 }
-.home .homeContent .cardDiv price range .label_total {
+.Sing-up .Sing-upContent .cardDiv price range .label_total {
   justify-content: space-between;
   align-items: center;
 }
-.home .homeContent .cardDiv price range .label_total .total {
+.Sing-up .Sing-upContent .cardDiv price range .label_total .total {
   color: var(--textColor);
   font-size: 18px;
   padding-bottom: 10px;
 }
-.home .homeContent .cardDiv .input {
+.Sing-up .Sing-upContent .cardDiv .input {
   height: 40px;
   padding: 0 1rem;
   background: var(--inputColor);
   border-radius: 3rem;
 }
-.home .homeContent .cardDiv .input input {
+.Sing-up .Sing-upContent .cardDiv .input input {
   background: none;
   border: none;
   outline: none;
@@ -99,24 +100,24 @@
   font-size: 13px;
   font-weight: 500;
 }
-.home .homeContent .cardDiv .input input::-moz-placeholder {
+.Sing-up .Sing-upContent .cardDiv .input input::-moz-placeholder {
   font-size: 13px;
 }
-.home .homeContent .cardDiv .input input:-ms-input-placeholder {
+.Sing-up .Sing-upContent .cardDiv .input input:-ms-input-placeholder {
   font-size: 13px;
 }
-.home .homeContent .cardDiv .input input::placeholder {
+.Sing-up .Sing-upContent .cardDiv .input input::placeholder {
   font-size: 13px;
 }
-.home .homeContent .cardDiv .input .icon {
+.Sing-up .Sing-upContent .cardDiv .input .icon {
   font-size: 18px;
   color: var(--PrimaryColor) !important;
   margin-left: 10px;
 }
-.home .homeContent .cardDiv .input input[type=range] {
+.Sing-up .Sing-upContent .cardDiv .input input[type=range] {
   background: blue;
 }
-.home .homeContent .cardDiv .searchOptions {
+.Sing-up .Sing-upContent .cardDiv .submit {
   position: absolute;
   background: var(--gradientColor);
   width: -webkit-max-content;
@@ -131,58 +132,58 @@
   transform: translate(-50%);
   justify-content: center;
 }
-.home .homeContent .cardDiv .searchOptions:hover {
+.Sing-up .Sing-upContent .cardDiv .submit:hover {
   background: var(--PrimaryColor);
 }
-.home .homeContent .cardDiv .searchOptions .icon {
+.Sing-up .Sing-upContent .cardDiv .submit .icon {
   font-size: 18px;
 }
-.home .homeContent .cardDiv .searchOptions span {
+.Sing-up .Sing-upContent .cardDiv .submit span {
   font-size: 13px;
 }
-.home .homeContent .homeFooterIcons {
+.Sing-up .Sing-upContent .homeFooterIcons {
   width: 100%;
   justify-content: space-between;
 }
-.home .homeContent .homeFooterIcons .icon {
+.Sing-up .Sing-upContent .homeFooterIcons .icon {
   font-size: 20px;
   margin: 0 5px;
   color: var(--whiteColor);
   font-weight: 600;
 }
-.home .homeContent .homeFooterIcons .icon:hover {
+.Sing-up .Sing-upContent .homeFooterIcons .icon:hover {
   color: var(--PrimaryColor);
 }
-.home .homeContent .cardDiv {
+.Sing-up .Sing-upContent .cardDiv {
   position: relative;
   padding: 2rem 1rem;
   background: var(--whiteColor);
   border-radius: 10px;
   gap: 1rem;
 }
-.home .homeContent .cardDiv Label {
+.Sing-up .Sing-upContent .cardDiv Label {
   display: block;
   color: var(--textColor);
   padding-bottom: 10px;
   font-size: 13px;
   font-weight: 500;
 }
-.home .homeContent .cardDiv .label_total {
+.Sing-up .Sing-upContent .cardDiv .label_total {
   justify-content: space-between;
   align-items: center;
 }
-.home .homeContent .cardDiv .label_total .total {
+.Sing-up .Sing-upContent .cardDiv .label_total .total {
   color: var(--textColor);
   font-size: 18px;
   padding-bottom: 10px;
 }
-.home .homeContent .cardDiv .input {
+.Sing-up .Sing-upContent .cardDiv .input {
   height: 40px;
   padding: 0 1rem;
   background: var(--inputColor);
   border-radius: 3rem;
 }
-.home .homeContent .cardDiv .input input {
+.Sing-up .Sing-upContent .cardDiv .input input {
   background: none;
   border: none;
   outline: none;
@@ -190,24 +191,24 @@
   font-size: 13px;
   font-weight: 500;
 }
-.home .homeContent .cardDiv .input input::-moz-placeholder {
+.Sing-up .Sing-upContent .cardDiv .input input::-moz-placeholder {
   font-size: 13px;
 }
-.home .homeContent .cardDiv .input input:-ms-input-placeholder {
+.Sing-up .Sing-upContent .cardDiv .input input:-ms-input-placeholder {
   font-size: 13px;
 }
-.home .homeContent .cardDiv .input input::placeholder {
+.Sing-up .Sing-upContent .cardDiv .input input::placeholder {
   font-size: 13px;
 }
-.home .homeContent .cardDiv .input .icon {
+.Sing-up .Sing-upContent .cardDiv .input .icon {
   font-size: 18px;
   color: var(--PrimaryColor) !important;
   margin-left: 10px;
 }
-.home .homeContent .cardDiv .input .input[type=range] {
+.Sing-up .Sing-upContent .cardDiv .input .input[type=range] {
   background: blue;
 }
-.home .homeContent .cardDiv .rearchOption {
+.Sing-up .Sing-upContent .cardDiv .submit {
   position: absolute;
   background: var(--gradientColor);
   width: -webkit-max-content;
@@ -223,28 +224,28 @@
   justify-content: center;
   cursor: pointer;
 }
-.home .homeContent .cardDiv .rearchOptionhover {
+.Sing-up .Sing-upContent .cardDiv .submithover {
   background: var(--PrimaryColor);
 }
-.home .homeContent .cardDiv .rearchOption .icon {
+.Sing-up .Sing-upContent .cardDiv .submit .icon {
   font-size: 18px;
 }
-.home .homeContent .cardDiv .rearchOption span {
+.Sing-up .Sing-upContent .cardDiv .submit span {
   font-size: 13px;
 }
 
 @media screen and (min-width: 500px) {
-  .home .homeContent .textDiv .smallText {
+  .Sing-up .Sing-upContent .textDiv .smallText {
     font-size: 16px;
   }
-  .home .homeContent .textDiv .homeTitle {
+  .Sing-up .Sing-upContent .textDiv .Sing-upTitle {
     position: relative;
     font-size: 2.3rem;
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
   }
-  .home .homeContent .textDiv .homeTitle::after {
+  .Sing-up .Sing-upContent .textDiv .Sing-upTitle::after {
     position: absolute;
     content: "";
     background: var(--SecondaryColor);
@@ -254,30 +255,30 @@
     bottom: 5px;
     z-index: -1;
   }
-  .home .homeContent .cardDiv {
+  .Sing-up .Sing-upContent .cardDiv {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media screen and (min-width: 660px) {
-  .home .homeContent .cardDiv {
+  .Sing-up .Sing-upContent .cardDiv {
     padding: 2rem 1rem;
     grid-template-columns: repeat(3, 1fr);
   }
 }
 @media screen and (min-width: 940px) {
-  .home {
+  .Sing-up {
     height: 70vh;
   }
 }
 @media screen and (min-width: 1024px) {
-  .home {
+  .Sing-up {
     height: 80vh;
   }
-  .home .homeContent {
+  .Sing-up .Sing-upContent {
     padding-left: 0;
     padding-right: 0;
   }
-  .home .homeContent .cardDiv {
+  .Sing-up .Sing-upContent .cardDiv {
     padding: 2rem 1rem;
     grid-template-columns: repeat(3, 1fr);
   }
@@ -304,4 +305,4 @@
   .home .homeContent .cardDiv .searchOptions span {
     font-size: 17px;
   }
-}/*# sourceMappingURL=home.css.map */
+}/*# sourceMappingURL=singup.css.map */
