@@ -6,6 +6,11 @@ import { TbGridDots } from "react-icons/tb"
 import { useState } from 'react';
 import {Link} from 'react-router-dom'
 
+import {
+    onAuthStateChanged,
+    signOut
+  } from "firebase/auth";
+  import { auth } from "../../firebase-config";
 
 const Navbar = () => {
 
@@ -19,6 +24,18 @@ const Navbar = () => {
     const removeNavbar = () => {
         setActive('navBar')
     }
+
+
+    const [user, setUser] = useState({});
+
+    onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+    });
+
+    const logout = async () => {
+        await signOut(auth);
+      };
+      
 
     return (
         <section className="navBarSection">
@@ -34,7 +51,7 @@ const Navbar = () => {
                     <ul onClick={removeNavbar} className="navLists flex">
 
                         <li className="navItem">
-                            <a href="#" className="navLink">Home</a>
+                            <Link to="/">Home</Link>
                         </li>
 
                         <li className="navItem">
@@ -53,13 +70,25 @@ const Navbar = () => {
                             <a href="#" className="navLink">Contact</a>
                         </li>
 
-                        <li className="navItem">
-                            <a href="#" className="navLink">Sing-in</a>
-                        </li>
+                        {user ? (
+                            <>
+                            <li className="navItem">
+                            <a href="#" className="navLink">  User Logged In:  {user?.email}</a>
+                            </li>
+                            <button className="btn"
+                                onClick={logout}> Sign Out
+                            </button></>
+                             ):(
+                                <>
+                                <button className="btn">
+                                <Link to="/Sing-in">Sing-in</Link>
+                            </button>
+    
+                            <button className="btn">
+                                <Link to="/Sing-up">Sing-up</Link>
+                            </button></>
+                            )}
 
-                        <button className="btn">
-                            <Link to="/Sing-up">Sing-up</Link>
-                        </button>
                     </ul>
 
 

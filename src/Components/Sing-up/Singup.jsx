@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react'
 import './singup.css'
-import video from "../../Assets/video3.mp4";
+import video from "../../Assets/video1.mp4";
 import {BiUserCircle} from 'react-icons/bi'
-import {FiFacebook} from 'react-icons/fi'
 import {RiLockPasswordFill} from 'react-icons/ri'
 import {AiOutlineInstagram} from 'react-icons/ai'
 import {AiOutlineFileDone} from 'react-icons/ai'
@@ -12,27 +11,44 @@ import {BsListTask} from 'react-icons/bs'
 import {TbApps} from 'react-icons/tb'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
+import { useHistory } from 'react-router-dom'
+
+
+import { useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged
+} from "firebase/auth";
+import { auth } from "../../firebase-config";
+
+
 
 const Singup = () => {
   useEffect(()=>{
     Aos.init({duration: 2000})
   }, [])
 
-const handleSubmit = (event) =>  {
-  event.preventDefault();
-  console.log(UserNameRef.current.value)
-  console.log(PassWordRef.current.value)
-  console.log(FnameRef.current.value)
-  console.log(LnameRef.current.value)
-  console.log(dateRef.current.value)
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
 
-}
+  const [user, setUser] = useState({});
 
-const UserNameRef = React.useRef(null)
-const PassWordRef = React.useRef(null)
-const FnameRef = React.useRef(null)
-const LnameRef = React.useRef(null)
-const dateRef = React.useRef(null)
+  let history = useHistory();
+
+  const register = async () => {
+    try {
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        registerEmail,
+        registerPassword
+      );
+      console.log(user);
+      history.push("/");
+    } catch (error) {
+      console.log(error.message);
+      <h4>somthing went wrong please try again</h4>
+    }
+  };
 
   return (
     <section id='Sing-up' className='Sing-up'>
@@ -49,12 +65,14 @@ const dateRef = React.useRef(null)
         </h1>
         </div>
 
-        <from data-aos="fade-down" className="cardDiv grid" onSubmit = {handleSubmit}>
+        <from data-aos="fade-down" className="cardDiv grid" onSubmit = {register}>
 
-          <div className="UserNameInput">
-            <label htmlFor="UserName">Enter your username:</label>
+          <div className="emailInput">
+            <label htmlFor="emailName">Enter your email:</label>
             <div className="input flex">
-            <input type="text" placeholder='Enter username here...' ref={UserNameRef}/>
+            <input type="text" placeholder='Enter email here...' onChange={(event) => {
+            setRegisterEmail(event.target.value);
+          }}/>
             <BiUserCircle className="icon"/>
             </div>
           </div>
@@ -62,12 +80,14 @@ const dateRef = React.useRef(null)
           <div className="PassWordInput">
             <label htmlFor="PassWord">Enter your password:</label>
             <div className="input flex">
-            <input type="password" placeholder='Enter password here...' ref={PassWordRef}/>
+            <input type="password"  placeholder='Enter password here...'  onChange={(event) => {
+            setRegisterPassword(event.target.value);
+          }}/>
             <RiLockPasswordFill className="icon"/>
             </div>
           </div>
 
-          <div className="FnameInput">
+          {/* <div className="FnameInput">
             <label htmlFor="Fname">Enter your First name:</label>
             <div className="input flex">
             <input type="text" placeholder='Enter First name here...' ref={FnameRef}/>
@@ -88,27 +108,15 @@ const dateRef = React.useRef(null)
             <div className="input flex">
             <input type="date" ref={dateRef}/>
             </div>
-          </div>
+          </div> */}
 
 
           <div className="submit flex">
            <AiOutlineFileDone className="icon"/>
-           <span type="submit" onClick={handleSubmit} >Submit</span>
+           <span type="submit" onClick={register} >Submit</span>
           </div>
 
         </from>
-
-        {/* <div data-aos="fade-up" className="homeFooterIcons flex">
-         <div className="rightIcons">
-          <FiFacebook className="icon"/>
-          <AiOutlineInstagram className="icon"/>
-          <SiTripadvisor className="icon"/>
-         </div>
-         <div className="leftIcons">
-            <BsListTask className="icon"/>
-            <TbApps className="icon"/>
-         </div>
-        </div> */}
       </div>
     </section>
   )
