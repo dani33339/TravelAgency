@@ -1,7 +1,7 @@
 .snackbar {
   position: fixed;
   left: 50%;
-  top: 0%;
+  top: 5%;
   transform: translate(-50%, -50%);
   width: 350px;
   height: 60px;
@@ -71,4 +71,4 @@
     bottom: 0;
     opacity: 0;
   }
-}/*# sourceMappingURL=toastifycreator.css.map */
+}/*# sourceMappingURL=Snackbar.css.map */

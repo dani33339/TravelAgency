@@ -76,7 +76,7 @@ const Navbar = () => {
                             <a href="#" className="navLink">  User Logged In:  {user?.email}</a>
                             </li>
                             <button className="btn"
-                                onClick={logout}> Sign Out
+                                onClick={logout}> Log out
                             </button></>
                              ):(
                                 <>

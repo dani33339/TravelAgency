@@ -3,24 +3,26 @@ import './singup.css'
 import video from "../../Assets/video1.mp4";
 import {BiUserCircle} from 'react-icons/bi'
 import {RiLockPasswordFill} from 'react-icons/ri'
-import {AiOutlineInstagram} from 'react-icons/ai'
 import {AiOutlineFileDone} from 'react-icons/ai'
 import {MdDriveFileRenameOutline} from 'react-icons/md'
-import {SiTripadvisor} from 'react-icons/si'
-import {BsListTask} from 'react-icons/bs'
-import {TbApps} from 'react-icons/tb'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { useHistory } from 'react-router-dom'
-
-
+import {
+  addDoc,
+  collection,
+  doc,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
 import { useState } from "react";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged
 } from "firebase/auth";
-import { auth } from "../../firebase-config";
-
+import {
+  auth,
+  db } from "../../firebase-config";
 
 
 const Singup = () => {
@@ -30,20 +32,30 @@ const Singup = () => {
 
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
-
-  const [user, setUser] = useState({});
-
+  const [FirstName, setFirstName] = useState("");
+  const [LastName, setLastName] = useState("");
+  const [birthday, setbirthday] = useState("");
+  
   let history = useHistory();
-
+  
   const register = async () => {
     try {
       const user = await createUserWithEmailAndPassword(
         auth,
         registerEmail,
         registerPassword
-      );
-      console.log(user);
-      history.push("/");
+      )
+        await setDoc(doc(db, "users", user.user.uid), {
+          email :registerEmail, 
+          FirstName :FirstName,
+          LastName :LastName,
+          birthday:birthday  ,
+          timeStamp: serverTimestamp(),
+          reservation : [],
+          
+        });
+        console.log(user);
+        history.push("/");
     } catch (error) {
       console.log(error.message);
       <h4>somthing went wrong please try again</h4>
@@ -87,10 +99,12 @@ const Singup = () => {
             </div>
           </div>
 
-          {/* <div className="FnameInput">
+          <div className="FnameInput">
             <label htmlFor="Fname">Enter your First name:</label>
             <div className="input flex">
-            <input type="text" placeholder='Enter First name here...' ref={FnameRef}/>
+            <input type="text" placeholder='Enter First name here...' onChange={(event) => {
+            setFirstName(event.target.value);
+          }}/>
             <MdDriveFileRenameOutline className="icon"/>
             </div>
           </div>
@@ -98,7 +112,9 @@ const Singup = () => {
           <div className="LnameInput">
             <label htmlFor="Lname">Enter your Last name:</label>
             <div className="input flex">
-            <input type="text" placeholder='Enter Last name here...' ref={LnameRef}/>
+            <input type="text" placeholder='Enter Last name here...' onChange={(event) => {
+            setLastName(event.target.value);
+          }}/>
             <MdDriveFileRenameOutline className="icon"/>
             </div>
           </div>
@@ -106,9 +122,11 @@ const Singup = () => {
           <div className="dateInput">
             <label htmlFor="date">Select your birthday date :</label>
             <div className="input flex">
-            <input type="date" ref={dateRef}/>
+            <input type="date" onChange={(event) => {
+            setbirthday(event.target.value);
+          }}/>
             </div>
-          </div> */}
+          </div>
 
 
           <div className="submit flex">

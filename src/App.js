@@ -1,5 +1,5 @@
 
-import './App.css';
+import './app.css';
 import React from "react";
 import Navbar from './Components/Navbar/Navbar';
 import Home from './Components/Home/Home';
@@ -8,7 +8,7 @@ import Footer from './Components/Footer/Footer';
 import {BrowserRouter as Router, Route , Switch, Navigate } from 'react-router-dom';
 import Singup from './Components/Sing-up/singup';
 import Singin from './Components/Sing-in/singin';
-
+import Admin from './Components/Admin/Admin'
 
 const App = () => {
   return (
@@ -31,6 +31,10 @@ const App = () => {
           <Singin/>
         </Route>
 
+        <Route path="/Admin">
+          
+          <Admin/>
+        </Route>
 
       </Switch>
     </div>
