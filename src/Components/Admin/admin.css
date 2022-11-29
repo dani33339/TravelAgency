@@ -199,12 +199,21 @@
   border-bottom: 1.5px solid var(--greyText);
 }
 :root .main .secContent .singleDestination .cardInfo .fees .grade {
-  color: var(--textColor);
-  max-width: 100px;
+  color: var(--blackColor);
+  font-weight: 500;
+  font-size: large;
+  max-width: 500px;
   line-height: 20px;
   display: flex;
+  justify-content: space-between;
+  gap: 20px;
   align-items: center;
   justify-content: center;
+}
+:root .main .secContent .singleDestination .cardInfo .fees .grade .textD {
+  font-weight: 1000;
+  color: var(--PrimaryColor);
+  font-size: 25px;
 }
 :root .main .secContent .singleDestination .cardInfo .fees .price {
   font-size: 2rem;

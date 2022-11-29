@@ -9,20 +9,13 @@ import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { useHistory } from 'react-router-dom'
 import {
-  addDoc,
-  collection,
   doc,
   serverTimestamp,
   setDoc,
 } from "firebase/firestore";
 import { useState } from "react";
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged
-} from "firebase/auth";
-import {
-  auth,
-  db } from "../../firebase-config";
+import {createUserWithEmailAndPassword} from "firebase/auth";
+import {auth,db } from "../../firebase-config";
 
 
 const Singup = () => {
@@ -49,7 +42,7 @@ const Singup = () => {
           email :registerEmail, 
           FirstName :FirstName,
           LastName :LastName,
-          birthday:birthday  ,
+          birthday:birthday ,
           timeStamp: serverTimestamp(),
           reservation : [],
           

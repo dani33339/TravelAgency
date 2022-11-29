@@ -221,22 +221,22 @@
                 border-bottom: 1.5px solid var(--greyText);
 
                 .grade{
-                  color: var(--textColor);
-                  max-width: 100px;
+                  color:  var(--blackColor);
+                  font-weight: 500;
+                  font-size: large;
+                  max-width: 500px;
                   line-height: 20px;
                   display: flex;
+                  justify-content: space-between;
+                  gap: 20px;
                   align-items: center;
                   justify-content: center;
 
-// +1 in blue
-                //   small{
-                //     text-align: center;
-                //     background: var(--gradientColor);
-                //     border-radius: 1rem;
-                //     color: var(--whiteColor);
-                //     padding: 1px 10px;
-                //     font-size: 10px;
-                //   }
+                .textD{
+                    font-weight: 1000;
+                    color: var(--PrimaryColor);
+                    font-size: 25px;   
+                }
                 }
 
                 .price{

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect,useState} from 'react'
 import './admin.css'
 import {HiOutlineLocationMarker} from 'react-icons/hi'
 import {AiFillCloseCircle} from 'react-icons/ai'
@@ -15,10 +15,11 @@ import newyork from '../../Assets/newyork.jpg'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import {GrFormAdd} from 'react-icons/gr'
-import { db} from "../../firebase-config";
-import {doc,setDoc,} from "firebase/firestore";
+import { db, storage} from "../../firebase-config";
+import {collection, doc,getDocs,setDoc} from "firebase/firestore";
 import {uid} from "uid";
-import { useState } from 'react';
+
+import {ref,uploadBytes, getDownloadURL} from "firebase/storage";
 
 
 const Data = [
@@ -126,36 +127,78 @@ const Admin = () => {
     useEffect(()=>{
       Aos.init({duration: 4000})
    }, [])
-   
-   const [imgSrc, setimgSrc] = useState("");
+
+   const [imgSrc, setimgSrc] = useState(null);
    const [destTitle, setdestTitle] = useState("");
    const [location, setlocation] = useState("");
-   const [grade, setgrade] = useState("");
+   const [Departure, setDeparture] = useState("");
+   const [Return, setReturn] = useState("");
    const [fees, setfees] = useState("");
    const [description, setdescription] = useState("");
+   //
+   const [Destenation,setDestenation] = useState([]);
+   const destenationRef = collection(db,"destenation")
+  
 
-   const [Destenation,setDestenation] = useState({});
-   
+   //uploadImage
+
+   const handleImageChange = (e) => {
+    if(e.target.files[0]){
+      setimgSrc(e.target.files[0]);
+    }
+   }
+
+   const handleSubmit = () => {
+    const imageRef = ref(storage, `image/${imgSrc.name}`);
+    uploadBytes(imageRef, imgSrc)
+      .then(() => {
+        getDownloadURL(imageRef)
+          .then(async (url) =>{
+            const uuid = uid()
+              setDoc(doc(db,"destenation",uuid),{
+              uuid,
+              imageUrl: url,
+              destTitle: destTitle ,
+              location: location,
+              Departure: Departure,
+              Return : Return,
+              fees: fees,
+              description:description
+            });
+      
+         })
+          .catch((error) => {
+            console.log(error.message, "error getting the image url");
+          });
+        // setimgSrc(null);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+
+
   //  read
+
   useEffect(() => {
     fetchDestenation();
   }, [])
+
   const fetchDestenation=async()=>{
-    const response=db.collection('destenation');
-    const data=await response.get();
-    data.docs.forEach(item=>{
-      setDestenation([...Destenation,item.data()])
-    });
-   
+      const data = await getDocs(destenationRef) 
+      setDestenation(data.docs.map((doc) => (doc.data())));
   }
+  
+  
+  
   // ניקוי שדות
   const clearinput = () =>{
-    setimgSrc('');
-    console.log(destTitle)
+    // setimgSrc('');
     setdestTitle("");
-    console.log(destTitle)
     setlocation('');
-    setgrade('');
+    setlocation('');
+    setlocation('');
     setfees('');
     setdescription('');
   }
@@ -163,20 +206,8 @@ const Admin = () => {
  
   
 
-   const AddDestenation = async () =>{
-      const uuid = uid()
-        setDoc(doc(db,"destenation",uuid),{
-        uuid,
-        imgSrc: imgSrc,
-        destTitle: destTitle ,
-        location: location,
-        grade: grade,
-        fees: fees,
-        description:description
-      });
-
-   }
-
+   
+  //delete
    const DeleteDestenation = (Data) => {
 
    }
@@ -184,11 +215,11 @@ const Admin = () => {
 
    const [active, setActive] = useState('addBar')
 
-    //function to toggle navbar
+    //function to toggle addbar
     const showadd = () => {
         setActive('addBar activeaddbar')
     }
-    //function to remove navbar
+    //function to remove addbar
     const removeaddbar = () => {
         setActive('addBar')
     }
@@ -204,7 +235,7 @@ const Admin = () => {
 
         
       <button id='addbtn' className='btn flex'  onClick={showadd}>ADD <GrFormAdd className="icon"/> </button>
-
+      <h1>{}</h1>
       {/* תפריט הוספה של היעדים */}
       <header className="header flex">
         <div className={active}>
@@ -213,16 +244,14 @@ const Admin = () => {
               <div className="addItem">
                 <label htmlFor="imgSrc">choose photo:</label>
                   <div className="input flex">
-                    <input type="file" onChange={(event) => {
-                    setimgSrc(event.target.value);
-                  }}/>
+                    <input type="file" onChange={handleImageChange}/>
                 </div>
               </div>   
 
               <div className="addItem">
                 <label htmlFor="destTitle">Enter your destanation:</label>
                   <div className="input flex">
-                    <input type="text"  placeholder='Enter destanation here...'  onChange={(event) => {
+                    <input type="text"  placeholder='Enter destanation here...' value={destTitle} onChange={(event) => {
                     setdestTitle(event.target.value);
                   }}/>
                 </div>
@@ -231,17 +260,26 @@ const Admin = () => {
                <div className="addItem">
                 <label htmlFor="location">Enter your location:</label>
                   <div className="input flex">
-                    <input type="text"  placeholder='Enter location here...'  onChange={(event) => {
+                    <input type="text"  placeholder='Enter location here...' value={location} onChange={(event) => {
                     setlocation(event.target.value);
                   }}/>
                 </div>
               </div> 
               
               <div className="addItem">
-                <label htmlFor="grade">Enter your grade:</label>
+                <label htmlFor="grade">Departure Date:</label>
                   <div className="input flex">
-                    <input type="text"  placeholder='Enter grade here...'  onChange={(event) => {
-                    setgrade(event.target.value);
+                    <input type="date"  placeholder='Enter grade here...' value={Departure} onChange={(event) => {
+                    setDeparture(event.target.value);
+                  }}/>
+                </div>
+              </div>
+
+              <div className="addItem">
+                <label htmlFor="grade">Return Date:</label>
+                  <div className="input flex">
+                    <input type="date"  placeholder='Enter grade here...' value={Return} onChange={(event) => {
+                    setReturn(event.target.value);
                   }}/>
                 </div>
               </div>
@@ -249,7 +287,7 @@ const Admin = () => {
               <div className="addItem">
                 <label htmlFor="price">Enter your price:</label>
                   <div className="input flex">
-                    <input type="number"  placeholder='Enter price here...'  onChange={(event) => {
+                    <input type="number"  placeholder='Enter price here...' value={fees} onChange={(event) => {
                     setfees(event.target.value);
                   }}/>
                 </div>
@@ -258,15 +296,20 @@ const Admin = () => {
               <div className="addItem">
                 <label htmlFor="description">Enter your description:</label>
                   <div className="input flex">
-                    <input type="textarea"   placeholder='Enter description here...'  onChange={(event) => {
+                    <input type="textarea"   placeholder='Enter description here...'  value={description} onChange={(event) => {
                     setdescription(event.target.value);
                   }}/>
                 </div>
               </div>
 
 
-              <button onClick={clearinput} className="btn">
-                <a onClick={AddDestenation}>Submit</a>
+              <button  className="btn">
+                <a onClick={ () => {
+                 
+                  clearinput()
+                  removeaddbar()
+                  handleSubmit()
+                  }}>Submit</a>
                </button>
             </ul>
 
@@ -281,17 +324,17 @@ const Admin = () => {
         {/* כרטיסים עם היעדים */}
         <div className="secContent grid">
           {
-            Data.map(({id, imgSrc, destTitle, location, grade, fees, description})=>{
+            Destenation.map(({id, imageUrl, destTitle, location, Departure,Return, fees, description})=>{
               return (
                 
                 <div key={id} data-aos="fade-up" className="singleDestination">
         
                    <div className="imageDiv">
-                   <img src={imgSrc} alt="" />
+                   <img src={imageUrl} alt="" />
                    </div>
         
                   <div className="cardInfo">
-                   <h4 className="destTitle">{destTitle}</h4>
+                   <h4 className="destTitle"> {destTitle}</h4>
                    <span className="continent flex">
                       <HiOutlineLocationMarker className="icon"/>
                       <span className="name">{location}</span>
@@ -299,10 +342,13 @@ const Admin = () => {
         
                    <div className="fees flex">
                       <div className="grade">
-                        <span>{grade}<small> </small> </span>
+                        <span  className="textD">From<small> </small> </span>
+                        <span>{Departure}<small> </small> </span>
+                        <span className="textD">  To  <small> </small> </span>
+                        <span>{Return}<small> </small> </span>
                       </div>
                       <div className="price">
-                        <h5>{fees}</h5>
+                        <h5>{fees}$</h5>
                       </div>
                    </div>
         
