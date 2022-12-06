@@ -14,10 +14,10 @@ const Main = () => {
   const [Destenation,setDestenation] = useState([]);
 
   useEffect(() => {
-    fetchDestenation();
+    fetchFlights();
   }, [])
 
-  const fetchDestenation=async()=>{
+  const fetchFlights=async()=>{
       const data = await getDocs(destenationRef) 
       setDestenation(data.docs.map((doc) => (doc.data())));
   }
@@ -26,6 +26,8 @@ const Main = () => {
   useEffect(()=>{
     Aos.init({duration: 4000})
  }, [])
+
+ 
   return (
     <section id='main' className='main section container'>
       <div className="secTitle">
@@ -49,14 +51,14 @@ const Main = () => {
               <h4 className="destTitle"> {destTitle}</h4>
               <span className="continent flex">
                  <HiOutlineLocationMarker className="icon"/>
-                 <span className="name">{location}</span>
+                 <span className="name">From {location}</span>
               </span>
    
               <div className="fees flex">
                  <div className="grade">
-                   <span  className="textD">From<small> </small> </span>
+                   <span  className="textD">Departure<small> </small> </span>
                    <span>{Departure}<small> </small> </span>
-                   <span className="textD">  To  <small> </small> </span>
+                   <span className="textD">  Return  <small> </small> </span>
                    <span>{Return}<small> </small> </span>
                  </div>
                  
@@ -67,10 +69,10 @@ const Main = () => {
               </div>
    
               <div className="desc">
-               <p>{description}</p>
+               <p>Airline: {description}</p>
               </div>
       
-                 <button className='btn flex'>DETAILS <HiClipboardList className="icon"/> </button>
+                 <button className='btn flex'>Order <HiClipboardList className="icon"/> </button>
                 </div>
               </div>
       

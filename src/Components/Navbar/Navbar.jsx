@@ -12,6 +12,7 @@ import {
   } from "firebase/auth";
   import { auth, db } from "../../firebase-config";
 import { checkUserIsAdmin } from "../../Permissions/checkUserIsAdmin";
+import { doc, getDoc } from "firebase/firestore";
 
 const Navbar = () => {
 
@@ -26,19 +27,33 @@ const Navbar = () => {
         setActive('navBar')
     }
 
-
     const [user, setUser] = useState({});
     const [admin, setAdmin] = useState();
-
-
-   onAuthStateChanged(auth, async (currentUser) => {
-        setAdmin(await checkUserIsAdmin(currentUser));
-    });
-
 
     onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
     });
+
+   onAuthStateChanged(auth, async (user) => {
+        setAdmin(await checkUserIsAdmin(user));
+    });
+
+    const [userData,setUserData] = useState([]);
+    
+
+    useEffect(() => {
+        if (user)
+            fetchUserData();
+      }, [])
+    
+      const fetchUserData=async()=>{
+        const UserRef = doc(db, "users", user?.uid);
+        const data = await getDoc(UserRef);
+        setUserData(data.data());
+      }
+
+
+    console.log(userData.FirstName);
 
     const logout = async () => {
         await signOut(auth);
@@ -87,7 +102,7 @@ const Navbar = () => {
                         {user ? (
                             <>
                             <li className="navItem">
-                            <a href="#" className="navLink">  User Logged In:  {user?.email}</a>
+                            <a href="#" className="navLink">  Hello: {userData.FirstName}</a>
                             </li>
                             <button className="btn"
                                 onClick={logout}> Log out

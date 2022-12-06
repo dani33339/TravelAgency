@@ -10,6 +10,7 @@ import Singup from './Components/Sing-up/singup';
 import Singin from './Components/Sing-in/singin';
 import Admin from './Components/Admin/Admin'
 import WithAdminAuth from './Permissions/withAdminAuth';
+import Order from './Components/Order/Order';
 
 const App = () => {
   return (
@@ -38,6 +39,11 @@ const App = () => {
           </WithAdminAuth>
         )} />
         
+        <Route path="/Order">
+          <Order/>
+        </Route>
+
+
       </Switch>
     </div>
     <Footer/>

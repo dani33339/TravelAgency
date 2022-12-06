@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from 'react'
-import './admin.css'
+import './Order.css'
 import {HiOutlineLocationMarker} from 'react-icons/hi'
 import {AiFillCloseCircle} from 'react-icons/ai'
 import {HiClipboardList} from 'react-icons/hi'
@@ -16,7 +16,7 @@ import {ref,uploadBytes, getDownloadURL} from "firebase/storage";
 const Data = []
 
 
-const Admin = () => {
+const Order = () => {
     useEffect(()=>{
       Aos.init({duration: 4000})
    }, [])
@@ -262,4 +262,4 @@ const Admin = () => {
     )
   }
   
-  export default Admin
+  export default Order

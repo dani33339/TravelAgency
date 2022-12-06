@@ -33,7 +33,6 @@ const Singin = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-    const [user, setUser] = useState({});
     let history = useHistory();
 
     const login = async () => {
