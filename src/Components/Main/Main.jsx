@@ -2,28 +2,10 @@ import React, {useEffect,useState} from 'react'
 import './main.css'
 import {HiOutlineLocationMarker} from 'react-icons/hi'
 import {HiClipboardList} from 'react-icons/hi'
-import barcelona from '../../Assets/barcelona.jpg'
-import berlin from '../../Assets/berlin.jpg'
-import toronto from '../../Assets/toronto.jpg'
-import craimea from '../../Assets/craimea.jpg'
-import moscow from '../../Assets/moscow.jpg'
-import paris from '../../Assets/paris.jpg'
-import prague from '../../Assets/prague.jpg'
-import tokyo from '../../Assets/tokyo.jpg'
-import newyork from '../../Assets/newyork.jpg'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
-import { db} from "../../firebase-config";
+import {db} from "../../firebase-config";
 import {collection,getDocs,} from "firebase/firestore";
-
-
-
-
-
-
-
-
-
 
 const Main = () => {
 

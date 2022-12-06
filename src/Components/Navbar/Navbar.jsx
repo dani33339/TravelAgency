@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './navbar.css'
 import { MdAirplaneTicket } from "react-icons/md"
 import { AiFillCloseCircle } from "react-icons/ai"
@@ -10,7 +10,8 @@ import {
     onAuthStateChanged,
     signOut
   } from "firebase/auth";
-  import { auth } from "../../firebase-config";
+  import { auth, db } from "../../firebase-config";
+import { checkUserIsAdmin } from "../../Permissions/checkUserIsAdmin";
 
 const Navbar = () => {
 
@@ -27,6 +28,13 @@ const Navbar = () => {
 
 
     const [user, setUser] = useState({});
+    const [admin, setAdmin] = useState();
+
+
+   onAuthStateChanged(auth, async (currentUser) => {
+        setAdmin(await checkUserIsAdmin(currentUser));
+    });
+
 
     onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
@@ -34,8 +42,9 @@ const Navbar = () => {
 
     const logout = async () => {
         await signOut(auth);
-      };
-      
+        window.location.reload(false);
+    };
+
 
     return (
         <section className="navBarSection">
@@ -53,6 +62,11 @@ const Navbar = () => {
                         <li className="navItem">
                             <Link to="/">Home</Link>
                         </li>
+                        
+                        {admin &&
+                        <li className="navItem">
+                            <a href="#" className="navLink">admin</a>
+                        </li>}
 
                         <li className="navItem">
                             <a href="#" className="navLink">Packages</a>

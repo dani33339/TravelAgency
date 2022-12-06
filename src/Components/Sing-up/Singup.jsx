@@ -28,6 +28,7 @@ const Singup = () => {
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const [birthday, setbirthday] = useState("");
+  const userRoles = ['user'];
   
   let history = useHistory();
   
@@ -44,6 +45,7 @@ const Singup = () => {
           LastName :LastName,
           birthday:birthday ,
           timeStamp: serverTimestamp(),
+          userRoles,
           reservation : [],
           
         });

@@ -1,14 +1,15 @@
 
-import './app.css';
+import './App.css';
 import React from "react";
 import Navbar from './Components/Navbar/Navbar';
 import Home from './Components/Home/Home';
 import Main from './Components/Main/Main';
 import Footer from './Components/Footer/Footer';
-import {BrowserRouter as Router, Route , Switch, Navigate } from 'react-router-dom';
+import {BrowserRouter as Router, Route , Switch } from 'react-router-dom';
 import Singup from './Components/Sing-up/singup';
 import Singin from './Components/Sing-in/singin';
 import Admin from './Components/Admin/Admin'
+import WithAdminAuth from './Permissions/withAdminAuth';
 
 const App = () => {
   return (
@@ -31,11 +32,12 @@ const App = () => {
           <Singin/>
         </Route>
 
-        <Route path="/Admin">
-          
-          <Admin/>
-        </Route>
-
+        <Route path="/admin" render={() => (
+          <WithAdminAuth>
+              <Admin />
+          </WithAdminAuth>
+        )} />
+        
       </Switch>
     </div>
     <Footer/>
