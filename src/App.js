@@ -9,10 +9,23 @@ import {BrowserRouter as Router, Route , Switch } from 'react-router-dom';
 import Singup from './Components/Sing-up/singup';
 import Singin from './Components/Sing-in/singin';
 import Admin from './Components/Admin/Admin'
-import WithAdminAuth from './Permissions/withAdminAuth';
 import Order from './Components/Order/Order';
+import ProtectedRoute from './Permissions/ProtectedRoute';
+import { fetchUserData } from './utils/fetchLocalStorageData';
+
+
 
 const App = () => {
+
+  var userData = fetchUserData();
+  var admin=false;
+
+if (userData)
+{
+  if(userData.userRoles.includes('admin'))
+    admin=true;
+}
+
   return (
     <Router>
     <>
@@ -33,16 +46,11 @@ const App = () => {
           <Singin/>
         </Route>
 
-        <Route path="/admin" render={() => (
-          <WithAdminAuth>
-              <Admin />
-          </WithAdminAuth>
-        )} />
+        <ProtectedRoute path="/admin" component={Admin} isAuth={admin} />
         
         <Route path="/Order">
           <Order/>
         </Route>
-
 
       </Switch>
     </div>

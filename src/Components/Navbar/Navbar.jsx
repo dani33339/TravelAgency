@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import './navbar.css'
 import { MdAirplaneTicket } from "react-icons/md"
 import { AiFillCloseCircle } from "react-icons/ai"
@@ -7,16 +6,18 @@ import { useState } from 'react';
 import {Link} from 'react-router-dom'
 
 import {
-    onAuthStateChanged,
     signOut
   } from "firebase/auth";
-  import { auth, db } from "../../firebase-config";
-import { checkUserIsAdmin } from "../../Permissions/checkUserIsAdmin";
-import { doc, getDoc } from "firebase/firestore";
+  import { auth } from "../../firebase-config";
+
+import { useAuthState } from "react-firebase-hooks/auth";
+import { fetchUserData } from "../../utils/fetchLocalStorageData";
+
 
 const Navbar = () => {
 
     const [active, setActive] = useState('navBar')
+
 
     //function to toggle navbar
     const showNav = () => {
@@ -26,39 +27,22 @@ const Navbar = () => {
     const removeNavbar = () => {
         setActive('navBar')
     }
-
-    const [user, setUser] = useState({});
-    const [admin, setAdmin] = useState();
-
-    onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-    });
-
-   onAuthStateChanged(auth, async (user) => {
-        setAdmin(await checkUserIsAdmin(user));
-    });
-
-    const [userData,setUserData] = useState([]);
-    
-
-    useEffect(() => {
-        if (user)
-            fetchUserData();
-      }, [])
-    
-      const fetchUserData=async()=>{
-        const UserRef = doc(db, "users", user?.uid);
-        const data = await getDoc(UserRef);
-        setUserData(data.data());
-      }
+    const [user, loading] = useAuthState(auth);
 
 
-    console.log(userData.FirstName);
+    var userData=null;
+    if (user)
+        userData = fetchUserData();
+
+
 
     const logout = async () => {
         await signOut(auth);
+        localStorage.clear();
         window.location.reload(false);
     };
+
+
 
 
     return (
@@ -78,7 +62,7 @@ const Navbar = () => {
                             <Link to="/">Home</Link>
                         </li>
                         
-                        {admin &&
+                        {user && userData.userRoles.includes('admin') &&
                         <li className="navItem">
                             <a href="#" className="navLink">admin</a>
                         </li>}

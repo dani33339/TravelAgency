@@ -12,10 +12,11 @@ import { useState } from "react";
 import {
   signInWithEmailAndPassword
 } from "firebase/auth";
-import { auth } from "../../firebase-config";
+import { auth, db } from "../../firebase-config";
 
 import { useRef } from "react";
 import Snackbar from "../Snackbar.js";
+import { doc, getDoc } from 'firebase/firestore';
 
 const SnackbarType = {
     success: "success",
@@ -42,8 +43,14 @@ const Singin = () => {
         loginEmail,
         loginPassword
         );
-        console.log(user);
+        // console.log(user.user.uid);
+        // localStorage.setItem("user",user.user.uid);
+        // const userInfo = JSON.parse(localStorage.getItem("user"))
+        const UserRef = doc(db, "users", user.user.uid);
+        const data = await getDoc(UserRef);
+        localStorage.setItem("user", JSON.stringify(data.data()));
         history.push("/");
+        window.location.reload(false);
 
     } catch (error) {
         console.log(error.message);
