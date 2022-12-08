@@ -64,7 +64,8 @@ const Navbar = () => {
                         
                         {user && userData.userRoles.includes('admin') &&
                         <li className="navItem">
-                            <a href="#" className="navLink">admin</a>
+                            <Link to="/admin">admin</Link>
+
                         </li>}
 
                         <li className="navItem">

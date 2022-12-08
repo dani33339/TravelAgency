@@ -43,9 +43,6 @@ const Singin = () => {
         loginEmail,
         loginPassword
         );
-        // console.log(user.user.uid);
-        // localStorage.setItem("user",user.user.uid);
-        // const userInfo = JSON.parse(localStorage.getItem("user"))
         const UserRef = doc(db, "users", user.user.uid);
         const data = await getDoc(UserRef);
         localStorage.setItem("user", JSON.stringify(data.data()));
