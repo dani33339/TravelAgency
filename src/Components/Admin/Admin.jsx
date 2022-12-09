@@ -58,6 +58,7 @@ const Admin = () => {
               fees: fees,
               description:description
             });
+            console.log("flight added successfully")
             window.location.reload(false);
          })
           .catch((error) => {

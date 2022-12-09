@@ -2,19 +2,28 @@ import React, {useEffect} from 'react'
 import './home.css'
 import video from "../../Assets/video3.mp4";
 import {GrLocation} from 'react-icons/gr'
-import {HiFilter} from 'react-icons/hi'
-import {FiFacebook} from 'react-icons/fi'
-import {AiOutlineInstagram} from 'react-icons/ai'
-import {SiTripadvisor} from 'react-icons/si'
-import {BsListTask} from 'react-icons/bs'
-import {TbApps} from 'react-icons/tb'
+import {AiOutlineSearch} from 'react-icons/ai'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
+import { useState } from 'react';
+import { SetSearch } from '../../utils/FlightsData';
 
 const Home = () => {
+
+  const [TripType,setTripType] = useState("Roudtrip");
+  const [From, setFrom] = useState("");
+  const [To, setTo] = useState("");
+  const [Depart, setDepart] = useState("");
+  const [Return, setReturn] = useState("");
+
   useEffect(()=>{
     Aos.init({duration: 2000})
   }, [])
+
+  const SetFillters = () => {
+    SetSearch(TripType,From,To,Depart,Return)
+};
+
   return (
     <section id='home' className='home'>
       <div className="overlay"></div>
@@ -31,51 +40,57 @@ const Home = () => {
         </div>
 
         <div data-aos="fade-down" className="cardDiv grid">
-          <div className="destinationInput">
-            <label htmlFor="city">Search your destination:</label>
+
+        <div className="FromInput">
+            <label htmlFor="city">Trip type:</label>
+            <div className="triptypeOptions flex">
+            <input type="radio" value="Roudtrip" name="Triptype" defaultChecked onChange={e=>setTripType(e.target.value)}/> Roudtrip
+          <input type="radio" value="One way" name="Triptype" onChange={e=>setTripType(e.target.value)}/> One way
+            </div>
+          </div>
+
+          <div className="FromInput">
+            <label htmlFor="city">From:</label>
             <div className="input flex">
-            <input type="text" placeholder='Enter name here...' />
+            <input type="text" placeholder='Enter name here...' value={From} onChange={(event) => {setFrom(event.target.value);}}/>
+            <GrLocation className="icon"/>
+            </div>
+          </div>
+
+          
+          <div className="ToInput">
+            <label htmlFor="city">To:</label>
+            <div className="input flex">
+            <input type="text" placeholder='Enter name here...' value={To} onChange={(event) => {setTo(event.target.value);}}/>
             <GrLocation className="icon"/>
             </div>
           </div>
 
 
-          <div className="dateInput">
-            <label htmlFor="city">Select your date:</label>
+          <div className="DepartInput">
+            <label htmlFor="city">Depart:</label>
             <div className="input flex">
             <input type="date" />
            
             </div>
           </div>
 
-          {/* price range */}
-          <div className="priceInput">
-            <div className="label_total flex">
-            <label htmlFor="city">Max price:</label>
-            <h3 className="total">$5000</h3>
-            </div>
+          {TripType==="Roudtrip" &&
+          <div className="ReturnInput">
+            <label htmlFor="city">Return:</label>
             <div className="input flex">
-              <input type="range" max="5000" min="1000" />
-            </div>
+            <input type="date" />
+           
+            </div>  
           </div>
+          }
 
           <div className="searchOptions flex">
-           <HiFilter className="icon"/>
-           <span>MORE FILTERS</span>
+          <span onClick={SetFillters}>Search</span>
+           <AiOutlineSearch className="icon"/>
           </div>
         </div>
 
-        <div data-aos="fade-up" className="homeFooterIcons flex">
-         <div className="rightIcons">
-          <FiFacebook className="icon"/>
-          <AiOutlineInstagram className="icon"/>
-          <SiTripadvisor className="icon"/>
-         </div>
-         <div className="leftIcons">
-            <BsListTask className="icon"/>
-            <TbApps className="icon"/>
-         </div>
-        </div>
       </div>
     </section>
   )

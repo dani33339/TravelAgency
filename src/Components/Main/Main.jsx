@@ -6,11 +6,12 @@ import Aos from 'aos'
 import 'aos/dist/aos.css'
 import {db} from "../../firebase-config";
 import {collection,getDocs,} from "firebase/firestore";
+import { fetchFlightsData } from '../../utils/FlightsData'
 
 const Main = () => {
 
   //raed
-  const destenationRef = collection(db,"destenation")
+  // const destenationRef = collection(db,"destenation")
   const [Destenation,setDestenation] = useState([]);
 
   useEffect(() => {
@@ -18,7 +19,8 @@ const Main = () => {
   }, [])
 
   const fetchFlights=async()=>{
-      const data = await getDocs(destenationRef) 
+      // const data = await getDocs(destenationRef) 
+      const data= await fetchFlightsData();
       setDestenation(data.docs.map((doc) => (doc.data())));
   }
 

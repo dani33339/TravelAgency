@@ -78,16 +78,7 @@
                 font-weight: 500;
             }
 
-            price range
-            .label_total{
-                justify-content: space-between;
-                align-items: center;
-                .total{
-                    color: var(--textColor);
-                    font-size: 18px;
-                    padding-bottom: 10px;
-                }
-            }
+
 
         .input{
             height: 40px;
@@ -120,6 +111,27 @@
             }
         }    
            
+
+
+        .triptypeOptions{
+            height: 40px;
+            padding: 0 1rem;
+            background: var(--inputColor);
+            border-radius: 3rem;
+            color: black;
+
+            
+            input{
+                width: 10%;
+                font-size: 13px;
+                font-weight: 500;
+
+            }
+
+            input[type=range]{
+                background: blue;
+            }
+            }
 
             .searchOptions{
                 position: absolute;

@@ -13,8 +13,6 @@ import Order from './Components/Order/Order';
 import ProtectedRoute from './Permissions/ProtectedRoute';
 import { fetchUserData } from './utils/fetchLocalStorageData';
 
-
-
 const App = () => {
 
   var userData = fetchUserData();
@@ -45,6 +43,10 @@ if (userData)
         <Route path="/Sing-in">
           <Singin/>
         </Route>
+{/* 
+        <Route path="/Admin">
+          <Admin/>
+        </Route> */}
 
         <ProtectedRoute path="/admin" component={Admin} isAuth={admin} />
         

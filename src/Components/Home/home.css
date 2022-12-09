@@ -76,15 +76,6 @@
   font-size: 13px;
   font-weight: 500;
 }
-.home .homeContent .cardDiv price range .label_total {
-  justify-content: space-between;
-  align-items: center;
-}
-.home .homeContent .cardDiv price range .label_total .total {
-  color: var(--textColor);
-  font-size: 18px;
-  padding-bottom: 10px;
-}
 .home .homeContent .cardDiv .input {
   height: 40px;
   padding: 0 1rem;
@@ -114,6 +105,21 @@
   margin-left: 10px;
 }
 .home .homeContent .cardDiv .input input[type=range] {
+  background: blue;
+}
+.home .homeContent .cardDiv .triptypeOptions {
+  height: 40px;
+  padding: 0 1rem;
+  background: var(--inputColor);
+  border-radius: 3rem;
+  color: black;
+}
+.home .homeContent .cardDiv .triptypeOptions input {
+  width: 10%;
+  font-size: 13px;
+  font-weight: 500;
+}
+.home .homeContent .cardDiv .triptypeOptions input[type=range] {
   background: blue;
 }
 .home .homeContent .cardDiv .searchOptions {

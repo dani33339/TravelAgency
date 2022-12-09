@@ -59,13 +59,12 @@ const Navbar = () => {
                     <ul onClick={removeNavbar} className="navLists flex">
 
                         <li className="navItem">
-                            <Link to="/">Home</Link>
+                        <a href="/" className="navLink">Home</a>
                         </li>
                         
                         {user && userData.userRoles.includes('admin') &&
                         <li className="navItem">
-                            <Link to="/admin">admin</Link>
-
+                            <a href="admin" className="navLink">admin</a>
                         </li>}
 
                         <li className="navItem">
@@ -87,7 +86,7 @@ const Navbar = () => {
                         {user ? (
                             <>
                             <li className="navItem">
-                            <a href="#" className="navLink">  Hello: {userData.FirstName}</a>
+                            <a> Hello: {userData.FirstName}</a>
                             </li>
                             <button className="btn"
                                 onClick={logout}> Log out
