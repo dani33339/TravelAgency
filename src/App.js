@@ -16,12 +16,12 @@ import { fetchUserData } from './utils/fetchLocalStorageData';
 const App = () => {
 
   var userData = fetchUserData();
-  var admin=false;
+  var adminState=false;
 
 if (userData)
 {
   if(userData.userRoles.includes('admin'))
-    admin=true;
+  adminState=true;
 }
 
   return (
@@ -48,7 +48,7 @@ if (userData)
           <Admin/>
         </Route> */}
 
-        <ProtectedRoute path="/admin" component={Admin} isAuth={admin} />
+        <ProtectedRoute path="/admin" component={Admin} isAuth={adminState} />
         
         <Route path="/Order">
           <Order/>

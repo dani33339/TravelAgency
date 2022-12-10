@@ -21,13 +21,15 @@ const Admin = () => {
       Aos.init({duration: 4000})
    }, [])
 
-   const [imgSrc, setimgSrc] = useState(null);
-   const [destTitle, setdestTitle] = useState("");
-   const [location, setlocation] = useState("");
-   const [Departure, setDeparture] = useState("");
-   const [Return, setReturn] = useState("");
-   const [fees, setfees] = useState("");
-   const [description, setdescription] = useState("");
+   const [ImgSrc, setImgSrc] = useState(null);
+   const [TripType,setTripType] = useState("Roudtrip");
+   const [Destination, setDestination] = useState("");
+   const [Location, setLocation] = useState("");
+   const [DepartureDate, setDepartureDate] = useState("");
+   const [ReturnDate, setReturnDate] = useState("");
+   const [Price, setPrice] = useState("");
+   const [Description, setDescription] = useState("");
+  //  const [Seats, setSeats] = useState("Seats");
    //
    const [Destenation,setDestenation] = useState([]);
    const destenationRef = collection(db,"destenation")
@@ -37,26 +39,27 @@ const Admin = () => {
 
    const handleImageChange = (e) => {
     if(e.target.files[0]){
-      setimgSrc(e.target.files[0]);
+      setImgSrc(e.target.files[0]);
     }
    }
 
    const handleSubmit = () => {
-    const imageRef = ref(storage, `image/${imgSrc.name}`);
-    uploadBytes(imageRef, imgSrc)
+    const imageRef = ref(storage, `image/${ImgSrc.name}`);
+    uploadBytes(imageRef, ImgSrc)
       .then(() => {
         getDownloadURL(imageRef)
           .then(async (url) =>{
             const uuid = uid()
-              setDoc(doc(db,"destenation",uuid),{
+              await setDoc(doc(db,"destenation",uuid),{
               uuid,
-              imageUrl: url,
-              destTitle: destTitle ,
-              location: location,
-              Departure: Departure,
-              Return : Return,
-              fees: fees,
-              description:description
+              ImageUrl: url,
+              TripType: TripType,
+              Destination: Destination ,
+              Location: Location,
+              DepartureDate: DepartureDate,
+              ReturnDate : ReturnDate,
+              Price: Price,
+              Description:Description
             });
             console.log("flight added successfully")
             window.location.reload(false);
@@ -89,12 +92,12 @@ const Admin = () => {
   // field clean
   const clearinput = () =>{
     // setimgSrc('');
-    setdestTitle("");
-    setlocation('');
-    setlocation('');
-    setlocation('');
-    setfees('');
-    setdescription('');
+    setDestination("");
+    setLocation('');
+    setLocation('');
+    setLocation('');
+    setPrice('');
+    setDescription('');
   }
 
    
@@ -129,7 +132,7 @@ const Admin = () => {
       {/* menu for adding flights*/}
       <header className="header flex">
         <div className={active}>
-            <ul  lassName="addLists flex">
+            {/* <ul  lassName="addLists flex"> */}
 
               <div className="addItem">
                 <label htmlFor="imgSrc">choose photo:</label>
@@ -141,8 +144,8 @@ const Admin = () => {
                <div className="addItem">
                 <label htmlFor="location">Enter your location:</label>
                   <div className="input flex">
-                    <input type="text"  placeholder='Enter location here...' value={location} onChange={(event) => {
-                    setlocation(event.target.value);
+                    <input type="text"  placeholder='Enter location here...' value={Location} onChange={(event) => {
+                    setLocation(event.target.value);
                   }}/>
                 </div>
               </div> 
@@ -151,8 +154,8 @@ const Admin = () => {
               <div className="addItem">
                 <label htmlFor="destTitle">Enter your destanation:</label>
                   <div className="input flex">
-                    <input type="text"  placeholder='Enter destanation here...' value={destTitle} onChange={(event) => {
-                    setdestTitle(event.target.value);
+                    <input type="text"  placeholder='Enter destanation here...' value={Destination} onChange={(event) => {
+                    setDestination(event.target.value);
                   }}/>
                 </div>
               </div> 
@@ -160,8 +163,8 @@ const Admin = () => {
               <div className="addItem">
                 <label htmlFor="grade">Departure Date:</label>
                   <div className="input flex">
-                    <input type="date"  placeholder='Enter grade here...' value={Departure} onChange={(event) => {
-                    setDeparture(event.target.value);
+                    <input type="date"  placeholder='Enter grade here...' value={DepartureDate} onChange={(event) => {
+                    setDepartureDate(event.target.value);
                   }}/>
                 </div>
               </div>
@@ -169,8 +172,8 @@ const Admin = () => {
               <div className="addItem">
                 <label htmlFor="grade">Return Date:</label>
                   <div className="input flex">
-                    <input type="date"  placeholder='Enter grade here...' value={Return} onChange={(event) => {
-                    setReturn(event.target.value);
+                    <input type="date"  placeholder='Enter grade here...' value={ReturnDate} onChange={(event) => {
+                    setReturnDate(event.target.value);
                   }}/>
                 </div>
               </div>
@@ -178,8 +181,8 @@ const Admin = () => {
               <div className="addItem">
                 <label htmlFor="price">Enter your price:</label>
                   <div className="input flex">
-                    <input type="number"  placeholder='Enter price here...' value={fees} onChange={(event) => {
-                    setfees(event.target.value);
+                    <input type="number"  placeholder='Enter price here...' value={Price} onChange={(event) => {
+                    setPrice(event.target.value);
                   }}/>
                 </div>
               </div>
@@ -187,8 +190,8 @@ const Admin = () => {
               <div className="addItem">
                 <label htmlFor="description">Enter your description:</label>
                   <div className="input flex">
-                    <input type="textarea"   placeholder='Enter description here...'  value={description} onChange={(event) => {
-                    setdescription(event.target.value);
+                    <input type="textarea"   placeholder='Enter description here...'  value={Description} onChange={(event) => {
+                    setDescription(event.target.value);
                   }}/>
                 </div>
               </div>
@@ -202,7 +205,7 @@ const Admin = () => {
                   handleSubmit()
                   }}>Submit</a>
                </button>
-            </ul>
+            {/* </ul> */}
 
             <div onClick={removeaddbar} className="closeaddbar">
                 <AiFillCloseCircle className="icon" />
@@ -212,39 +215,38 @@ const Admin = () => {
       </header>
 
 
-        {/* כרטיסים עם היעדים */}
         <div className="secContent grid">
           {
-            Destenation.map(({id, imageUrl, destTitle, location, Departure,Return, fees, description})=>{
-              return (
+          Destenation.map(({id, ImageUrl, Destination, Location, DepartureDate, ReturnDate, Price, Description})=>{
+            return (
                 
                 <div key={id} data-aos="fade-up" className="singleDestination">
         
                    <div className="imageDiv">
-                   <img src={imageUrl} alt="" />
+                   <img src={ImageUrl} alt="" />
                    </div>
         
                   <div className="cardInfo">
-                   <h4 className="destTitle"> {destTitle}</h4>
+                   <h4 className="destTitle"> {Destination}</h4>
                    <span className="continent flex">
                       <HiOutlineLocationMarker className="icon"/>
-                      <span className="name">{location}</span>
+                      <span className="name">{Location}</span>
                    </span>
         
                    <div className="fees flex">
                       <div className="grade">
                         <span  className="textD">From<small> </small> </span>
-                        <span>{Departure}<small> </small> </span>
+                        <span>{DepartureDate}<small> </small> </span>
                         <span className="textD">  To  <small> </small> </span>
-                        <span>{Return}<small> </small> </span>
+                        <span>{ReturnDate}<small> </small> </span>
                       </div>
                       <div className="price">
-                        <h5>{fees}$</h5>
+                        <h5>{Price}$</h5>
                       </div>
                    </div>
         
                    <div className="desc">
-                    <p>{description}</p>
+                    <p>{Description}</p>
                    </div>
 
                     <div id='card_btn'>

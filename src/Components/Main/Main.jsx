@@ -28,7 +28,6 @@ const Main = () => {
   useEffect(()=>{
     Aos.init({duration: 4000})
  }, [])
-
  
   return (
     <section id='main' className='main section container'>
@@ -40,38 +39,38 @@ const Main = () => {
 
       <div className="secContent grid">
         {
-          Destenation.map(({id, imageUrl, destTitle, location, Departure,Return, fees, description})=>{
+          Destenation.map(({id, ImageUrl, Destination, Location, DepartureDate, ReturnDate, Price, Description})=>{
             return (
               
               <div key={id} data-aos="fade-up" className="singleDestination">
         
               <div className="imageDiv">
-              <img src={imageUrl} alt="" />
+              <img src={ImageUrl} alt="" />
               </div>
    
              <div className="cardInfo">
-              <h4 className="destTitle"> {destTitle}</h4>
+              <h4 className="destTitle"> {Destination}</h4>
               <span className="continent flex">
                  <HiOutlineLocationMarker className="icon"/>
-                 <span className="name">From {location}</span>
+                 <span className="name">From {Location}</span>
               </span>
    
               <div className="fees flex">
                  <div className="grade">
                    <span  className="textD">Departure<small> </small> </span>
-                   <span>{Departure}<small> </small> </span>
+                   <span>{DepartureDate}<small> </small> </span>
                    <span className="textD">  Return  <small> </small> </span>
-                   <span>{Return}<small> </small> </span>
+                   <span>{ReturnDate}<small> </small> </span>
                  </div>
                  
                  <div className="price">
                     
-                   <h5>{fees}$</h5>
+                   <h5>{Price}$</h5>
                  </div>
               </div>
    
               <div className="desc">
-               <p>Airline: {description}</p>
+               <p>Airline: {Description}</p>
               </div>
       
                  <button className='btn flex'>Order <HiClipboardList className="icon"/> </button>

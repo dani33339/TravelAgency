@@ -3,10 +3,19 @@ import { db } from "../firebase-config";
 
 var fillters;
 
-export function SetSearch(triptype, from, to, deapartdate, returndate) {
-    fillters = triptype
+export function SetSearch(TripType, Location, Destination, deapartdate, returndate) {
+    fillters = TripType
     
   }
+
+  // ImageUrl: url,
+  // TripType: TripType,
+  // Destination: Destination ,
+  // Location: Location,
+  // Departure: DepartureDate,
+  // ReturnDate : ReturnDate,
+  // Price: Price,
+  // Description:Description
 
 export const fetchFlightsData = async () => {
     // console.log(fillters);

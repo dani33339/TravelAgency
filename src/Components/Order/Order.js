@@ -128,7 +128,7 @@ const Order = () => {
       {/* menu for adding flights*/}
       <header className="header flex">
         <div className={active}>
-            <ul  lassName="addLists flex">
+            {/* <ul  lassName="addLists flex"> */}
 
               <div className="addItem">
                 <label htmlFor="imgSrc">choose photo:</label>
@@ -201,7 +201,7 @@ const Order = () => {
                   handleSubmit()
                   }}>Submit</a>
                </button>
-            </ul>
+            {/* </ul> */}
 
             <div onClick={removeaddbar} className="closeaddbar">
                 <AiFillCloseCircle className="icon" />

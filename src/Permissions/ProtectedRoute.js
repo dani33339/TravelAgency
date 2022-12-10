@@ -1,10 +1,9 @@
 import React from "react"
 import { Route, Redirect } from "react-router-dom"
 
-function ProtectedRoute({ isAuth: IsAuth, component: Component, ...rest}) {
+function ProtectedRoute({ isAuth: IsAuth, component: Component}) {
     return(
         <Route
-            {...rest}
             render={(props) => {
                 if (IsAuth){
                 return <Component />;
