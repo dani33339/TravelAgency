@@ -39,7 +39,7 @@ const Main = () => {
 
       <div className="secContent grid">
         {
-          Destenation.map(({id, ImageUrl, Destination, Location, DepartureDate, ReturnDate, Price, Description})=>{
+          Destenation.map(({id, ImageUrl, Destination, Location, DepartureDate, ReturnDate, Price, Description,TripType})=>{
             return (
               
               <div key={id} data-aos="fade-up" className="singleDestination">
@@ -59,8 +59,8 @@ const Main = () => {
                  <div className="grade">
                    <span  className="textD">Departure<small> </small> </span>
                    <span>{DepartureDate}<small> </small> </span>
-                   <span className="textD">  Return  <small> </small> </span>
-                   <span>{ReturnDate}<small> </small> </span>
+                   {TripType==="Roudtrip"? (<><span className="textD">  To  <small> </small> </span><span>{ReturnDate}<small> </small> </span></>):
+                        (<><span className="textD"> </span><span>One way<small> </small> </span></>)}
                  </div>
                  
                  <div className="price">

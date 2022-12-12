@@ -134,6 +134,14 @@ const Admin = () => {
         <div className={active}>
             {/* <ul  lassName="addLists flex"> */}
 
+            <div className="addItem">
+                <label htmlFor="TripType">choose TripType:</label>
+                  <div className="input flex">
+                  <input type="radio" value="Roudtrip" name="Triptype" defaultChecked onChange={e=>setTripType(e.target.value)}/> Roudtrip
+                  <input type="radio" value="One way" name="Triptype" onChange={e=>setTripType(e.target.value)}/> One way </div>
+              </div>   
+
+
               <div className="addItem">
                 <label htmlFor="imgSrc">choose photo:</label>
                   <div className="input flex">
@@ -169,6 +177,8 @@ const Admin = () => {
                 </div>
               </div>
 
+              {TripType==="Roudtrip" &&
+
               <div className="addItem">
                 <label htmlFor="grade">Return Date:</label>
                   <div className="input flex">
@@ -177,6 +187,7 @@ const Admin = () => {
                   }}/>
                 </div>
               </div>
+            }
 
               <div className="addItem">
                 <label htmlFor="price">Enter your price:</label>
@@ -217,7 +228,7 @@ const Admin = () => {
 
         <div className="secContent grid">
           {
-          Destenation.map(({id, ImageUrl, Destination, Location, DepartureDate, ReturnDate, Price, Description})=>{
+          Destenation.map(({id, ImageUrl, Destination, Location, DepartureDate, ReturnDate, Price, Description,TripType})=>{
             return (
                 
                 <div key={id} data-aos="fade-up" className="singleDestination">
@@ -237,8 +248,8 @@ const Admin = () => {
                       <div className="grade">
                         <span  className="textD">From<small> </small> </span>
                         <span>{DepartureDate}<small> </small> </span>
-                        <span className="textD">  To  <small> </small> </span>
-                        <span>{ReturnDate}<small> </small> </span>
+                        {TripType==="Roudtrip"? (<><span className="textD">  To  <small> </small> </span><span>{ReturnDate}<small> </small> </span></>):
+                        (<><span className="textD">  </span><span>One way<small> </small> </span></>)}
                       </div>
                       <div className="price">
                         <h5>{Price}$</h5>
