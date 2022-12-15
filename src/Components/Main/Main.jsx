@@ -22,6 +22,7 @@ const Main = () => {
       // const data = await getDocs(destenationRef) 
       const data= await fetchFlightsData();
       setDestenation(data.docs.map((doc) => (doc.data())));
+
   }
 
 
@@ -39,38 +40,38 @@ const Main = () => {
 
       <div className="secContent grid">
         {
-          Destenation.map(({id, ImageUrl, Destination, Location, DepartureDate, ReturnDate, Price, Description,TripType})=>{
+          Destenation.map((des,index) => {
             return (
               
-              <div key={id} data-aos="fade-up" className="singleDestination">
+              <div key={index} data-aos="fade-up" className="singleDestination">
         
               <div className="imageDiv">
-              <img src={ImageUrl} alt="" />
+              <img src={des.ImageUrl} alt="" />
               </div>
    
              <div className="cardInfo">
-              <h4 className="destTitle"> {Destination}</h4>
+              <h4 className="destTitle"> {des.Destination}</h4>
               <span className="continent flex">
                  <HiOutlineLocationMarker className="icon"/>
-                 <span className="name">From {Location}</span>
+                 <span className="name">From {des.Location}</span>
               </span>
    
               <div className="fees flex">
                  <div className="grade">
                    <span  className="textD">Departure<small> </small> </span>
-                   <span>{DepartureDate}<small> </small> </span>
-                   {TripType==="Roudtrip"? (<><span className="textD">  To  <small> </small> </span><span>{ReturnDate}<small> </small> </span></>):
+                   <span>{des.DepartureDate}<small> </small> </span>
+                   {des.TripType==="Roudtrip"? (<><span className="textD">  To  <small> </small> </span><span>{des.ReturnDate}<small> </small> </span></>):
                         (<><span className="textD"> </span><span>One way<small> </small> </span></>)}
                  </div>
                  
                  <div className="price">
                     
-                   <h5>{Price}$</h5>
+                   <h5>{des.Price}$</h5>
                  </div>
               </div>
    
               <div className="desc">
-               <p>Airline: {Description}</p>
+               <p>Airline: {des.Description}</p>
               </div>
       
                  <button className='btn flex'>Order <HiClipboardList className="icon"/> </button>

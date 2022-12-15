@@ -227,49 +227,48 @@ const Admin = () => {
 
 
         <div className="secContent grid">
-          {
-          Destenation.map(({id, ImageUrl, Destination, Location, DepartureDate, ReturnDate, Price, Description,TripType})=>{
+        {
+          Destenation.map((des,index) => {
             return (
-                
-                <div key={id} data-aos="fade-up" className="singleDestination">
+              
+              <div key={index} data-aos="fade-up" className="singleDestination">
         
-                   <div className="imageDiv">
-                   <img src={ImageUrl} alt="" />
-                   </div>
-        
-                  <div className="cardInfo">
-                   <h4 className="destTitle"> {Destination}</h4>
-                   <span className="continent flex">
-                      <HiOutlineLocationMarker className="icon"/>
-                      <span className="name">{Location}</span>
-                   </span>
-        
-                   <div className="fees flex">
-                      <div className="grade">
-                        <span  className="textD">From<small> </small> </span>
-                        <span>{DepartureDate}<small> </small> </span>
-                        {TripType==="Roudtrip"? (<><span className="textD">  To  <small> </small> </span><span>{ReturnDate}<small> </small> </span></>):
-                        (<><span className="textD">  </span><span>One way<small> </small> </span></>)}
-                      </div>
-                      <div className="price">
-                        <h5>{Price}$</h5>
-                      </div>
-                   </div>
-        
-                   <div className="desc">
-                    <p>{Description}</p>
-                   </div>
-
-                    <div id='card_btn'>
-                      <button className='btn flex'>EDIT <HiClipboardList className="icon" /> </button>
-                      <button className='btn flex'>DELETE <HiClipboardList className="icon" onClick={() => DeleteDestenation(Data)}/> </button>
-                    </div>
-                  </div>
+              <div className="imageDiv">
+              <img src={des.ImageUrl} alt="" />
+              </div>
+   
+             <div className="cardInfo">
+              <h4 className="destTitle"> {des.Destination}</h4>
+              <span className="continent flex">
+                 <HiOutlineLocationMarker className="icon"/>
+                 <span className="name">From {des.Location}</span>
+              </span>
+   
+              <div className="fees flex">
+                 <div className="grade">
+                   <span  className="textD">Departure<small> </small> </span>
+                   <span>{des.DepartureDate}<small> </small> </span>
+                   {des.TripType==="Roudtrip"? (<><span className="textD">  To  <small> </small> </span><span>{des.ReturnDate}<small> </small> </span></>):
+                        (<><span className="textD"> </span><span>One way<small> </small> </span></>)}
+                 </div>
+                 
+                 <div className="price">
+                    
+                   <h5>{des.Price}$</h5>
+                 </div>
+              </div>
+   
+              <div className="desc">
+               <p>Airline: {des.Description}</p>
+              </div>
+      
+                 <button className='btn flex'>Order <HiClipboardList className="icon"/> </button>
                 </div>
-        
-              )
-            }) 
-          }
+              </div>
+      
+            )
+          }) 
+        }
         </div>
        
       </section>
