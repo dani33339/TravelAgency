@@ -7,7 +7,7 @@ import Aos from 'aos'
 import 'aos/dist/aos.css'
 import {GrFormAdd} from 'react-icons/gr'
 import { db, storage} from "../../firebase-config";
-import {collection, doc,getDocs,setDoc} from "firebase/firestore";
+import {collection, deleteDoc, doc,getDocs,setDoc} from "firebase/firestore";
 import {uid} from "uid";
 
 import {ref,uploadBytes, getDownloadURL} from "firebase/storage";
@@ -102,8 +102,9 @@ const Admin = () => {
 
    
   //delete
-   const DeleteDestenation = (Data) => {
-
+   const DeleteDestenation = async (uuid) => {
+    await deleteDoc(doc(db, "destenation", uuid));
+    window.location.reload(false);
    }
 
    const [active, setActive] = useState('addBar')
@@ -262,7 +263,7 @@ const Admin = () => {
 
                     <div id='card_btn'>
                       <button className='btn flex'>EDIT <HiClipboardList className="icon" /> </button>
-                      <button className='btn flex'>DELETE <HiClipboardList className="icon" onClick={() => DeleteDestenation(Data)}/> </button>
+                      <button className='btn flex'>DELETE <HiClipboardList className="icon" onClick={() => DeleteDestenation(des.uuid)}/> </button>
                     </div>
                   </div>
                 </div>

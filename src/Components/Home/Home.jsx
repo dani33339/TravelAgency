@@ -11,17 +11,16 @@ import { SetSearch } from '../../utils/FlightsData';
 const Home = () => {
 
   const [TripType,setTripType] = useState("Roudtrip");
-  const [From, setFrom] = useState("");
-  const [To, setTo] = useState("");
-  const [Depart, setDepart] = useState("");
-  const [Return, setReturn] = useState("");
-
+  const [Location, setLocation] = useState("");
+  const [Destination, setDestination] = useState("");
+  const [DepartureDate, setDepartureDate] = useState("");
+  const [ReturnDate, setReturnDate] = useState("");
   useEffect(()=>{
     Aos.init({duration: 2000})
   }, [])
 
   const SetFillters = () => {
-    SetSearch(TripType,From,To,Depart,Return)
+    SetSearch(TripType,Location,Destination,DepartureDate,ReturnDate);
 };
 
   return (
@@ -52,7 +51,7 @@ const Home = () => {
           <div className="FromInput">
             <label htmlFor="city">From:</label>
             <div className="input flex">
-            <input type="text" placeholder='Enter name here...' value={From} onChange={(event) => {setFrom(event.target.value);}}/>
+            <input type="text" placeholder='Enter name here...' value={Location} onChange={(event) => {setLocation(event.target.value);}}/>
             <GrLocation className="icon"/>
             </div>
           </div>
@@ -61,7 +60,7 @@ const Home = () => {
           <div className="ToInput">
             <label htmlFor="city">To:</label>
             <div className="input flex">
-            <input type="text" placeholder='Enter name here...' value={To} onChange={(event) => {setTo(event.target.value);}}/>
+            <input type="text" placeholder='Enter name here...' value={Destination} onChange={(event) => {setDestination(event.target.value);}}/>
             <GrLocation className="icon"/>
             </div>
           </div>
@@ -70,8 +69,7 @@ const Home = () => {
           <div className="DepartInput">
             <label htmlFor="city">Depart:</label>
             <div className="input flex">
-            <input type="date" />
-           
+            <input type="date" value={DepartureDate} onChange={(event) => {setDepartureDate(event.target.value); }}/>
             </div>
           </div>
 
@@ -79,7 +77,7 @@ const Home = () => {
           <div className="ReturnInput">
             <label htmlFor="city">Return:</label>
             <div className="input flex">
-            <input type="date" />
+            <input type="date"  value={ReturnDate} onChange={(event) => {setReturnDate(event.target.value); }}/>
            
             </div>  
           </div>

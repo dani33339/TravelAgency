@@ -4,8 +4,6 @@ import {HiOutlineLocationMarker} from 'react-icons/hi'
 import {HiClipboardList} from 'react-icons/hi'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
-import {db} from "../../firebase-config";
-import {collection,getDocs,} from "firebase/firestore";
 import { fetchFlightsData } from '../../utils/FlightsData'
 
 const Main = () => {
