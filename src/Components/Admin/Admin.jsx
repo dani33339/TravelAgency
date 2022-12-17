@@ -138,8 +138,11 @@ const Admin = () => {
             <div className="addItem">
                 <label htmlFor="TripType">choose TripType:</label>
                   <div className="input flex">
-                  <input type="radio" value="Roudtrip" name="Triptype" defaultChecked onChange={e=>setTripType(e.target.value)}/> Roudtrip
-                  <input type="radio" value="One way" name="Triptype" onChange={e=>setTripType(e.target.value)}/> One way </div>
+                  <input type="radio" value="Roudtrip" name="Triptype" defaultChecked onChange={e=>setTripType(e.target.value)}/> 
+                  Roudtrip
+                  <input type="radio" value="One way" name="Triptype" onChange={e=>setTripType(e.target.value)}/>
+                  One way 
+                  </div>
               </div>   
 
 

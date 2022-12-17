@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react'
+import React, {useEffect,useState,useContext} from 'react'
 import './main.css'
 import {HiOutlineLocationMarker} from 'react-icons/hi'
 import {HiClipboardList} from 'react-icons/hi'
@@ -6,12 +6,14 @@ import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { fetchFlightsData } from '../../utils/FlightsData'
 
-const Main = () => {
 
+const Main = (props) => {
+
+  console.log(props.data)
   //raed
   // const destenationRef = collection(db,"destenation")
   const [Destenation,setDestenation] = useState([]);
-
+  console.log(props.data)
   useEffect(() => {
     fetchFlights();
   }, [])

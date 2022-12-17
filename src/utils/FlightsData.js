@@ -3,6 +3,7 @@ import { db } from "../firebase-config";
 import { fetchFilterData } from "./fetchLocalStorageData";
 
 
+
 export function SetSearch(TripType, Location, Destination, DepartureDate, ReturnDate) {
     var fillters = [];
     fillters[0]= TripType;
@@ -34,6 +35,7 @@ export const fetchFlightsData = async () => {
 
     return data;
   }
+  
   const destenationRef = collection(db,"destenation")
     const data = await getDocs(destenationRef) 
     return data;

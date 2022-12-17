@@ -17,6 +17,13 @@
 :root .main input[type=file] {
   cursor: pointer !important;
 }
+:root .main input[type=radio] {
+  font-size: 250px;
+  font-weight: 600;
+  /* position */
+  margin-right: 6em;
+  cursor: pointer;
+}
 :root .main .input {
   height: 40px;
   padding: 0 1rem;

@@ -18,11 +18,25 @@
         cursor: pointer !important;
         
     }
+    input[type=radio]{
+        font-size: 250px;
+        font-weight: 600;
+        
+        
+        /* position */
+        margin-right: 6em;
+        
+        cursor: pointer;
+        
+        
+    }
+    
     .input{
         height: 40px;
         padding: 0 1rem;
         background: var(--inputColor);
         border-radius: 3rem;
+        
         input{
             background: none;
             border: none;
