@@ -31,7 +31,7 @@ const Home = () => {
 
   const ResetSetSearch = () => {
     setFilters(null); //reset old filters
-    setTripType("");
+    setTripType("Roudtrip");
     setLocation("");
     setDestination("");
     setDepartureDate("");
