@@ -1,29 +1,41 @@
 import React, {useEffect} from 'react'
 import './home.css'
 import video from "../../Assets/video3.mp4";
-import {GrLocation} from 'react-icons/gr'
+import {GrLocation, GrPowerReset} from 'react-icons/gr'
 import {AiOutlineSearch} from 'react-icons/ai'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { useState } from 'react';
-import { SetSearch } from '../../utils/FlightsData';
 import Main from '../Main/Main';
 
 const Home = () => {
-  const [data,setdata] = useState("hello");
+
   const [TripType,setTripType] = useState("Roudtrip");
   const [Location, setLocation] = useState("");
   const [Destination, setDestination] = useState("");
   const [DepartureDate, setDepartureDate] = useState("");
   const [ReturnDate, setReturnDate] = useState("");
+
+  const [Filters,setFilters] = useState(null);
+
   useEffect(()=>{
     Aos.init({duration: 2000})
   }, [])
 
   
-  const SetFillters = () => {
-     SetSearch(TripType,Location,Destination,DepartureDate,ReturnDate);
-     setdata("chendge")
+  const SetSearch = () => {
+    setFilters(null); //reset old filters
+    setFilters({TripType,Location,Destination,DepartureDate,ReturnDate})
+  };
+
+
+  const ResetSetSearch = () => {
+    setFilters(null); //reset old filters
+    setTripType("Roudtrip");
+    setLocation("");
+    setDestination("");
+    setDepartureDate("");
+    setReturnDate("");
   };
 
   return (
@@ -87,15 +99,19 @@ const Home = () => {
             </div>}
 
           <div className="searchOptions flex">
-            <span onClick={SetFillters}>Search</span>
+            <span onClick={SetSearch}>Search</span>
             <AiOutlineSearch className="icon" />
           </div>
+
+          <div className="ResetsearchOptions flex">
+            <span onClick={ResetSetSearch}>Reset Search</span>
+            <GrPowerReset className="icon" />
+          </div>
+
         </div>
 
       </div>
-    </section><Main data = {data}/></>
-    
-    
+    </section><Main Filters = {Filters}/></> 
     
   )
   

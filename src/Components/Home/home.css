@@ -146,6 +146,30 @@
 .home .homeContent .cardDiv .searchOptions span {
   font-size: 13px;
 }
+.home .homeContent .cardDiv .ResetsearchOptions {
+  position: absolute;
+  background: var(--gradientColor);
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  bottom: -0.7rem;
+  -moz-column-gap: 0.8rem;
+       column-gap: 0.8rem;
+  padding: 5px 1rem;
+  border-radius: 3rem;
+  right: 30%;
+  transform: translate(-50%);
+  justify-content: center;
+}
+.home .homeContent .cardDiv .ResetsearchOptions:hover {
+  background: var(--PrimaryColor);
+}
+.home .homeContent .cardDiv .ResetsearchOptions .icon {
+  font-size: 18px;
+}
+.home .homeContent .cardDiv .ResetsearchOptions span {
+  font-size: 13px;
+}
 .home .homeContent .homeFooterIcons {
   width: 100%;
   justify-content: space-between;

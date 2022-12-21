@@ -1,35 +1,63 @@
-import React, {useEffect,useState,useContext} from 'react'
+import React, {useEffect,useState} from 'react'
 import './main.css'
 import {HiOutlineLocationMarker} from 'react-icons/hi'
 import {HiClipboardList} from 'react-icons/hi'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
-import { fetchFlightsData } from '../../utils/FlightsData'
+import { collection, getDocs } from 'firebase/firestore'
+import { db } from '../../firebase-config'
 
 
 const Main = (props) => {
-
-  console.log(props.data)
+  // if (props.Filters!==undefined)
+    console.log(props.Filters)
   //raed
-  // const destenationRef = collection(db,"destenation")
+  const destenationRef = collection(db,"destenation")
   const [Destenation,setDestenation] = useState([]);
-  console.log(props.data)
+  
   useEffect(() => {
     fetchFlights();
-  }, [])
+    Aos.init({duration: 4000})
+  }, [props.Filters])
 
-  const fetchFlights=async()=>{
-      // const data = await getDocs(destenationRef) 
-      const data= await fetchFlightsData();
-      setDestenation(data.docs.map((doc) => (doc.data())));
+  async function fetchFlights(){
 
+    const data = await getDocs(destenationRef) 
+    setDestenation(data.docs.map((doc) => (doc.data())));
+
+    if (props.Filters)
+    {
+      var result
+      if (props.Filters.TripType)
+      {
+         result = Destenation.filter(des => des.TripType===props.Filters.TripType);
+      }
+
+      if (props.Filters.Location)
+      {
+          result = result.filter(des => des.Location===props.Filters.Location);
+      }
+
+
+      if (props.Filters.Destination)
+      {
+          result = result.filter(des => des.Destination===props.Filters.Destination);
+      }  
+ 
+      if (props.Filters.DepartureDate)
+      {
+          result = result.filter(des => des.DepartureDate===props.Filters.DepartureDate);
+      }  
+
+      if (props.Filters.ReturnDate)
+      {
+          result = result.filter(des => des.ReturnDate===props.Filters.ReturnDate);
+      }  
+      setDestenation(result)
+    }
   }
 
 
-  useEffect(()=>{
-    Aos.init({duration: 4000})
- }, [])
- 
   return (
     <section id='main' className='main section container'>
       <div className="secTitle">
