@@ -14,116 +14,13 @@
 :root .main {
   width: 100%;
 }
-:root .main input[type=file] {
-  cursor: pointer !important;
-}
-:root .main .input {
-  height: 40px;
-  padding: 0 1rem;
-  background: var(--inputColor);
-  border-radius: 3rem;
-}
-:root .main .input input {
-  background: none;
-  border: none;
-  outline: none;
-  width: 100%;
-  font-size: 25px;
-  font-weight: 600;
-}
-:root .main .input input::-moz-placeholder {
-  font-size: 16px;
-}
-:root .main .input input:-ms-input-placeholder {
-  font-size: 16px;
-}
-:root .main .input input::placeholder {
-  font-size: 16px;
-}
-:root .main .input .icon {
-  font-size: 18px;
-  color: var(--PrimaryColor) !important;
-  margin-left: 10px;
-}
-:root .main .input input[type=range] {
-  background: blue;
-}
-:root .main .header {
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: none;
-  width: 30%;
-  height: var(--headerHeight);
-  z-index: 1000;
-  padding: 2rem;
-}
-:root .main .header .addBar {
-  background: var(--whiteColor);
-  position: absolute;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  width: 100%;
-  border-radius: 1rem;
-  padding: 2rem;
-  top: -3000%;
-  left: 150%;
-  transform: translate(-50%);
-  z-index: 2000;
-  box-shadow: 0 2px 4px rgba(2, 15, 29, 0.904);
-  transition: 0.3s ease-in-out;
-}
-:root .main .header .addBar .addLists {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  align-items: center;
-  margin: auto;
-  padding: 0.5rem 0;
-}
-:root .main .header .addBar .addLists .addItem {
-  padding: 0.5rem 0;
-}
-:root .main .header .addBar .addLists .btn {
-  margin-top: 1rem;
-}
-:root .main .header .addBar .addLists .btn a {
-  font-weight: 600;
-  color: var(--whiteColor);
-}
-:root .main .header .addBar .closeaddbar {
-  position: absolute;
-  top: 1rem;
-  right: 1.5rem;
-  color: var(--PrimaryColor);
-}
-:root .main .header .addBar .closeaddbar:hover .icon {
-  color: var(--SecondaryColor);
-}
-:root .main .header .activeaddbar {
-  top: -10rem;
-}
-:root .main .btn {
-  margin-top: 5rem;
-  color: var(--whiteColor);
-  font-weight: 1000;
-  font-size: medium;
-  margin: 5px;
-}
-:root .main .btn .icon {
-  align-self: center;
-  font-size: 25px;
-}
 :root .main .secTitle .title {
   position: relative;
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
   color: var(--textColor);
-  margin: 2rem 0;
+  margin: 1rem 0;
   z-index: 2;
 }
 :root .main .secTitle .title::after {
@@ -199,21 +96,12 @@
   border-bottom: 1.5px solid var(--greyText);
 }
 :root .main .secContent .singleDestination .cardInfo .fees .grade {
-  color: var(--blackColor);
-  font-weight: 500;
-  font-size: large;
-  max-width: 500px;
+  color: var(--textColor);
+  max-width: 100px;
   line-height: 20px;
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
   align-items: center;
   justify-content: center;
-}
-:root .main .secContent .singleDestination .cardInfo .fees .grade .textD {
-  font-weight: 1000;
-  color: var(--PrimaryColor);
-  font-size: 25px;
 }
 :root .main .secContent .singleDestination .cardInfo .fees .price {
   font-size: 2rem;
@@ -229,13 +117,69 @@
   color: var(--whiteColor);
   font-weight: 600;
   justify-content: space-between;
-  gap: 0.5px;
-  display: inline-block;
-  margin: 5px;
+  gap: 0.5rem;
 }
 :root .main .secContent .singleDestination .cardInfo .btn .icon {
   align-self: center;
   font-size: 18px;
+}
+:root .main .secContent .Orderdetails {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  width: 30%;
+  height: var(--headerHeight);
+  z-index: 1000;
+  padding: 2rem;
+}
+:root .main .secContent .Orderdetails .addBar {
+  background: var(--whiteColor);
+  position: absolute;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 100%;
+  border-radius: 1rem;
+  padding: 2rem;
+  top: -3000%;
+  left: 150%;
+  transform: translate(-50%);
+  z-index: 2000;
+  box-shadow: 0 2px 4px rgba(2, 15, 29, 0.904);
+  transition: 0.3s ease-in-out;
+}
+:root .main .secContent .Orderdetails .addBar .addLists {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  margin: auto;
+  padding: 0.5rem 0;
+}
+:root .main .secContent .Orderdetails .addBar .addLists .addItem {
+  padding: 0.5rem 0;
+}
+:root .main .secContent .Orderdetails .addBar .addLists .btn {
+  margin-top: 1rem;
+}
+:root .main .secContent .Orderdetails .addBar .addLists .btn a {
+  font-weight: 600;
+  color: var(--whiteColor);
+}
+:root .main .secContent .Orderdetails .addBar .closeaddbar {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  color: var(--PrimaryColor);
+}
+:root .main .secContent .Orderdetails .addBar .closeaddbar:hover .icon {
+  color: var(--SecondaryColor);
+}
+:root .main .secContent .Orderdetails .activeaddbar {
+  top: -10rem;
 }
 
 @media screen and (min-width: 500px) {

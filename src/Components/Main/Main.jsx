@@ -6,12 +6,18 @@ import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../../firebase-config'
+import { useHistory } from 'react-router-dom'
+import Order from '../Order/Order'
+import {Link} from 'react-router-dom'
+
 
 
 const Main = (props) => {
-  //raed
   const destenationRef = collection(db,"destenation")
   const [Destenation,setDestenation] = useState([]);
+
+  let history = useHistory();
+
   
   useEffect(() => {
     fetchFlights();
@@ -54,6 +60,13 @@ const Main = (props) => {
       setDestenation(result)
     }
   }
+
+
+  const Order = async (des) => {
+    history.push({
+      pathname: 'Order',
+      state: des
+  });   }
 
 
   return (
@@ -100,7 +113,14 @@ const Main = (props) => {
                <p>Airline: {des.Description}</p>
               </div>
       
-                 <button className='btn flex'>Order <HiClipboardList className="icon"/> </button>
+              {/* <Link to={`/Order`}state={{des}}/> */}
+
+                {/* <button className="btn flex"> Order
+                    <Link to={`/Order`}state={{des:des}}>
+                        <HiClipboardList className="icon" />
+                    </Link>
+                </button> */}
+                 <button className='btn flex'>Order <HiClipboardList className="icon" onClick={() => Order(des)}/> </button>
                 </div>
               </div>
       

@@ -3,7 +3,6 @@ import './App.css';
 import React from "react";
 import Navbar from './Components/Navbar/Navbar';
 import Home from './Components/Home/Home';
-import Main from './Components/Main/Main';
 import Footer from './Components/Footer/Footer';
 import {BrowserRouter as Router, Route , Switch } from 'react-router-dom';
 import Singup from './Components/Sing-up/Singup';
@@ -24,6 +23,7 @@ if (userData)
   adminState=true;
 }
 
+
   return (
     <Router>
     <>
@@ -43,10 +43,8 @@ if (userData)
         </Route>
 
         <ProtectedRoute path="/admin" component={Admin} isAuth={adminState} />
-        
-        <Route path="/Order">
-          <Order/>
-        </Route>
+
+        <ProtectedRoute path="/Order" component={Order} isAuth={userData} />
 
       </Switch>
     </div>
