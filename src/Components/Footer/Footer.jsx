@@ -155,7 +155,7 @@ const Footer = () => {
 
          <div className="footerDiv flex">
            <small>TRAVEL.</small>
-           <small>COPYRIGHTS RESERVED - Daniel Markov And Anton Volkov</small>
+           <small>COPYRIGHTS RESERVED - Daniel Markov & Anton Volkov</small>
          </div>
        </div>
 

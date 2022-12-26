@@ -15,13 +15,7 @@ import {
 import { auth, db } from "../../firebase-config";
 
 import { useRef } from "react";
-import Snackbar from "../Snackbar.js";
 import { doc, getDoc } from 'firebase/firestore';
-
-const SnackbarType = {
-    success: "success",
-    fail: "fail",
-  };
   
 
 const Singin = () => {
@@ -96,12 +90,6 @@ const Singin = () => {
            <span type="submit" onClick={login} >Submit</span>
            
           </div>
-
-        <Snackbar
-            ref={snackbarRef}
-            message="Error please try again!"
-            type={SnackbarType.fail}
-        />
         </from>
 
       </div>

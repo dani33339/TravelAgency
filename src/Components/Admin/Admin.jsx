@@ -9,12 +9,7 @@ import {GrFormAdd} from 'react-icons/gr'
 import { db, storage} from "../../firebase-config";
 import {collection, deleteDoc, doc,getDocs,setDoc} from "firebase/firestore";
 import {uid} from "uid";
-
 import {ref,uploadBytes, getDownloadURL} from "firebase/storage";
-
-
-const Data = []
-
 
 const Admin = () => {
     useEffect(()=>{
@@ -34,6 +29,7 @@ const Admin = () => {
    const [Destenation,setDestenation] = useState([]);
    const destenationRef = collection(db,"destenation")
   
+   const [Currentdes, setCurrentdes] = useState(null)  
 
    //uploadImage
 
@@ -49,7 +45,14 @@ const Admin = () => {
       .then(() => {
         getDownloadURL(imageRef)
           .then(async (url) =>{
-            const uuid = uid()
+            var uuid;
+            if (Currentdes)
+            {
+              uuid = Currentdes.uuid;
+            }
+            else{
+              uuid = uid();
+            }
               await setDoc(doc(db,"destenation",uuid),{
               uuid,
               ImageUrl: url,
@@ -91,13 +94,16 @@ const Admin = () => {
   
   // field clean
   const clearinput = () =>{
-    // setimgSrc('');
+    setImgSrc('');
     setDestination("");
     setLocation('');
+    setDepartureDate('');
     setLocation('');
-    setLocation('');
+    setReturnDate('');
     setPrice('');
     setDescription('');
+
+    setCurrentdes(null)
   }
 
    
@@ -110,11 +116,24 @@ const Admin = () => {
    const [active, setActive] = useState('addBar')
 
     //function to toggle addbar
-    const showadd = () => {
+    const showadd = (des=null) => {
+      if (des)
+      {
+        setCurrentdes(des)
+        setTripType(des.TripType);
+        setImgSrc(des.ImageUrl);
+        setDestination(des.Destination);
+        setLocation(des.Location);
+        setDepartureDate(des.DepartureDate);
+        setReturnDate(des.ReturnDate);
+        setPrice(des.Price);
+        setDescription(des.Description);
+      }
         setActive('addBar activeaddbar')
     }
     //function to remove addbar
     const removeaddbar = () => {
+        clearinput();
         setActive('addBar')
     }
 
@@ -265,7 +284,7 @@ const Admin = () => {
                    </div>
 
                     <div id='card_btn'>
-                      <button className='btn flex'>EDIT <HiClipboardList className="icon" /> </button>
+                      <button className='btn flex'>EDIT <HiClipboardList className="icon" onClick={() => showadd(des)}/> </button>
                       <button className='btn flex'>DELETE <HiClipboardList className="icon" onClick={() => DeleteDestenation(des.uuid)}/> </button>
                     </div>
                   </div>

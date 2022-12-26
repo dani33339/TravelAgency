@@ -10,6 +10,7 @@ import 'aos/dist/aos.css'
 import { useHistory } from 'react-router-dom'
 import {
   doc,
+  getDoc,
   serverTimestamp,
   setDoc,
 } from "firebase/firestore";
@@ -49,8 +50,11 @@ const Singup = () => {
           reservation : [],
           
         });
-        console.log(user);
+        const UserRef = doc(db, "users", user.user.uid);
+        const data = await getDoc(UserRef);
+        localStorage.setItem("user", JSON.stringify(data.data()));
         history.push("/");
+        window.location.reload(false);
     } catch (error) {
       console.log(error.message);
       <h4>somthing went wrong please try again</h4>

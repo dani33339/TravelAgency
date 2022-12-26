@@ -35,15 +35,11 @@ const Navbar = () => {
         userData = fetchUserData();
 
 
-
     const logout = async () => {
         await signOut(auth);
         localStorage.clear();
         window.location.reload(false);
     };
-
-
-
 
     return (
         <section className="navBarSection">
@@ -72,15 +68,7 @@ const Navbar = () => {
                         </li>
 
                         <li className="navItem">
-                            <a href="#" className="navLink">shop</a>
-                        </li>
-
-                        <li className="navItem">
                             <a href="#" className="navLink">About</a>
-                        </li>
-
-                        <li className="navItem">
-                            <a href="#" className="navLink">Contact</a>
                         </li>
 
                         {user ? (

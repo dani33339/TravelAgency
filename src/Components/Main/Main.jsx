@@ -9,8 +9,6 @@ import { db } from '../../firebase-config'
 
 
 const Main = (props) => {
-  // if (props.Filters!==undefined)
-    console.log(props.Filters)
   //raed
   const destenationRef = collection(db,"destenation")
   const [Destenation,setDestenation] = useState([]);
