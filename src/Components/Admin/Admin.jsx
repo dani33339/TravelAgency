@@ -24,7 +24,7 @@ const Admin = () => {
    const [ReturnDate, setReturnDate] = useState("");
    const [Price, setPrice] = useState("");
    const [Description, setDescription] = useState("");
-  //  const [Seats, setSeats] = useState("Seats");
+   const [Nseats, setNseats] = useState("");
    //
    const [Destenation,setDestenation] = useState([]);
    const destenationRef = collection(db,"destenation")
@@ -62,7 +62,8 @@ const Admin = () => {
               DepartureDate: DepartureDate,
               ReturnDate : ReturnDate,
               Price: Price,
-              Description:Description
+              Description: Description,
+              Nseats: Nseats
             });
             console.log("flight added successfully")
             window.location.reload(false);
@@ -77,10 +78,6 @@ const Admin = () => {
       });
   };
 
-
-
-  //  read
-
   useEffect(() => {
     fetchDestenation();
   }, [])
@@ -89,8 +86,6 @@ const Admin = () => {
       const data = await getDocs(destenationRef) 
       setDestenation(data.docs.map((doc) => (doc.data())));
   }
-  
-  
   
   // field clean
   const clearinput = () =>{
@@ -102,7 +97,7 @@ const Admin = () => {
     setReturnDate('');
     setPrice('');
     setDescription('');
-
+    setNseats('');
     setCurrentdes(null)
   }
 
@@ -117,7 +112,7 @@ const Admin = () => {
 
     //function to toggle addbar
     const showadd = (des=null) => {
-      if (des)
+      if (des.uuid)
       {
         setCurrentdes(des)
         setTripType(des.TripType);
@@ -128,6 +123,7 @@ const Admin = () => {
         setReturnDate(des.ReturnDate);
         setPrice(des.Price);
         setDescription(des.Description);
+        setNseats(des.Nseats);
       }
         setActive('addBar activeaddbar')
     }
@@ -230,6 +226,14 @@ const Admin = () => {
                 </div>
               </div>
 
+              <div className="addItem">
+                <label htmlFor="nseats">Enter number of seats:</label>
+                  <div className="input flex">
+                    <input type="number"  placeholder='Enter number here...' value={Nseats} onChange={(event) => {
+                    setNseats(event.target.value);
+                  }}/>
+                </div>
+              </div>
 
               <button  className="btn">
                 <a onClick={ () => {

@@ -112,14 +112,6 @@ const Main = (props) => {
               <div className="desc">
                <p>Airline: {des.Description}</p>
               </div>
-      
-              {/* <Link to={`/Order`}state={{des}}/> */}
-
-                {/* <button className="btn flex"> Order
-                    <Link to={`/Order`}state={{des:des}}>
-                        <HiClipboardList className="icon" />
-                    </Link>
-                </button> */}
                  <button className='btn flex'>Order <HiClipboardList className="icon" onClick={() => Order(des)}/> </button>
                 </div>
               </div>
