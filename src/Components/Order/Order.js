@@ -1,28 +1,24 @@
 import React, {useEffect,useState} from 'react'
 import './Order.css'
 import {HiOutlineLocationMarker} from 'react-icons/hi'
-import {AiFillCloseCircle} from 'react-icons/ai'
-import {HiClipboardList} from 'react-icons/hi'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
-import {GrFormAdd} from 'react-icons/gr'
-import { db, storage} from "../../firebase-config";
-import {collection, doc,getDocs,setDoc} from "firebase/firestore";
-import {uid} from "uid";
-
-import {ref,uploadBytes, getDownloadURL} from "firebase/storage";
-import { useLocation } from 'react-router-dom'
+import { db,} from "../../firebase-config";
+import {collection, doc, updateDoc} from "firebase/firestore";
+import { useHistory, useLocation } from 'react-router-dom'
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 const Order = (props) => {
   useEffect(()=>{
     Aos.init({duration: 4000})
   }, [])
 
-  const { state } = useLocation();
-
+  const { state: des } = useLocation();
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const [TicketsAmount, setTicketsAmount] = useState("1");
+
+  let history = useHistory();
 
 
   const options = [
@@ -41,7 +37,23 @@ const Order = (props) => {
   const onChange = (event) => {
     setTicketsAmount(event.target.value);
   };
+  
+  const sleep = ms => new Promise(
+    resolve => setTimeout(resolve, ms)
+  );
 
+  console.log(process.env.REACT_APP_clientId);
+  console.log(process.env.REACT_APP_apiKey);
+
+  const handleSubmit = async () => {
+    await sleep(4000);
+    const getdes = doc(db, 'destenation', des.uuid);
+    console.log(TicketsAmount)
+    await updateDoc(getdes, {
+      Nseats: des.Nseats-TicketsAmount,
+    });
+    history.push("/");
+  }
 
   return (
     <section id='main' className='main section container'>
@@ -55,37 +67,37 @@ const Order = (props) => {
 
                       
               <div className="imageDiv">
-              <img src={state.ImageUrl} alt="" />
+              <img src={des.ImageUrl} alt="" />
               </div>
    
              <div className="cardInfo">
-              <h4 className="destTitle"> {state.Destination}</h4>
+              <h4 className="destTitle"> {des.Destination}</h4>
               <span className="continent flex">
                  <HiOutlineLocationMarker className="icon"/>
-                 <span className="name">From {state.Location}</span>
+                 <span className="name">From {des.Location}</span>
               </span>
    
               <div className="fees flex">
                  <div className="grade">
                    <span  className="textD">Departure<small> </small> </span>
-                   <span>{state.DepartureDate}<small> </small> </span>
-                   {state.TripType==="Roudtrip"? (<><span className="textD">  To  <small> </small> </span><span>{state.ReturnDate}<small> </small> </span></>):
+                   <span>{des.DepartureDate}<small> </small> </span>
+                   {des.TripType==="Roudtrip"? (<><span className="textD">  To  <small> </small> </span><span>{des.ReturnDate}<small> </small> </span></>):
                         (<><span className="textD"> </span><span>One way<small> </small> </span></>)}
                  </div>
                  
                  <div className="price">
                     
-                   <h5>{state.Price}$</h5>
+                   <h5>{des.Price}$</h5>
                  </div>
               </div>
    
               <div className="desc">
-               <p>Airline: {state.Description}</p>
+               <p>Airline: {des.Description}</p>
               </div>
 
               <div className="price">
                     
-                    <h5>Total sum:{state.Price*TicketsAmount}$</h5>
+                    <h5>Total sum:{des.Price*TicketsAmount}$</h5>
                   </div>
 
               <div className="Orderdetails">
@@ -95,10 +107,10 @@ const Order = (props) => {
                 <label htmlFor="TripType">choose amount of tickets:</label>
                   <div className="input flex">
                   <select value={TicketsAmount} onChange={onChange}>
-        {options.map((option) => (
-          <option value={option.value}>{option.label}</option>
-        ))}
-      </select>
+                  {options.map((option,index) => (
+                  <option key={index} value={option.value}>{option.label}</option>
+                  ))}
+                  </select>
                   </div>
               </div>   
 
@@ -118,18 +130,45 @@ const Order = (props) => {
                   }}/>
                 </div>
               </div> 
-        
-              <button  className="btn">
-                <a onClick={ () => {
-                 
 
+      <div  className="btn">
+      <PayPalScriptProvider
+        options={{ "client-id": process.env.REACT_APP_clientId}}
+      >
+        <PayPalButtons
+          createOrder={(data, actions) => {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  amount: {
+                    value: des.Price*TicketsAmount,
+                  },
+                },
+              ],
+            });
+          }}
+          onApprove={async (data, actions) => {
+            const details = await actions.order.capture();
+            const name = details.payer.name.given_name;
+            alert("Transaction completed by " + name); 
+            
+            handleSubmit();
+          }}
+        />
+      </PayPalScriptProvider>
+               </div>
+
+        
+              {/* <button  className="btn">
+                <a onClick={ () => {  
+                  
+                 handleSubmit();
                   }}>Submit</a>
-               </button>
+               </button> */}
 
         </div>
       </div>
 
-                 {/* <button className='btn flex'>Order <HiClipboardList className="icon" /> </button> */}
                 </div>
               </div>
       
