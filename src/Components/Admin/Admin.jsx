@@ -152,11 +152,11 @@ const Admin = () => {
 
             <div className="addItem">
                 <label htmlFor="TripType">choose TripType:</label>
-                  <div className="input flex">
-                  <input type="radio" value="Roudtrip" name="Triptype" defaultChecked onChange={e=>setTripType(e.target.value)}/> 
+                  <div className="input flex"> 
                   Roudtrip
+                  <input type="radio" value="Roudtrip" name="Triptype" defaultChecked onChange={e=>setTripType(e.target.value)}/> 
+                  One_way
                   <input type="radio" value="One way" name="Triptype" onChange={e=>setTripType(e.target.value)}/>
-                  One way 
                   </div>
               </div>   
 
@@ -273,18 +273,20 @@ const Admin = () => {
         
                    <div className="fees flex">
                       <div className="grade">
-                        <span  className="textD">From<small> </small> </span>
-                        <span>{des.DepartureDate}<small> </small> </span>
-                        {des.TripType==="Roudtrip"? (<><span className="textD">  To  <small> </small> </span><span>{des.ReturnDate}<small> </small> </span></>):
-                        (<><span className="textD">  </span><span>One way<small> </small> </span></>)}
+                        <span  className="textD">From</span>
+                        <span>{des.DepartureDate}</span>
+                        {des.TripType==="Roudtrip"? (<><span className="textD">  To  </span><span>{des.ReturnDate}<small> </small> </span></>):
+                        (<><span className="textD">  </span><span>One way</span></>)}
                       </div>
-                      <div className="price">
-                        <h5>{des.Price}$</h5>
-                      </div>
+                     
                    </div>
-        
+
+                   <div className="price">
+                      <h5>{des.Price}$</h5>
+                    </div>
+
                    <div className="desc">
-                    <p>{des.Description}</p>
+                   <p>Airline: {des.Description}</p>
                    </div>
 
                     <div id='card_btn'>

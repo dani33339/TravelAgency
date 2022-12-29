@@ -18,19 +18,15 @@
         cursor: pointer !important;
         
     }
-    input[type=radio]{
-        font-size: 250px;
-        font-weight: 600;
-        
-        
-        /* position */
-        margin-right: 6em;
-        
-        cursor: pointer;
-        
-        
-    }
+   .Roudtrip{
+    font-size: 15px;
+   } 
+   .One_way{
+    font-size: 15px;
+    padding: 1rem;
     
+   }
+
     .input{
         height: 40px;
         padding: 0 1rem;
@@ -249,18 +245,17 @@
                 .textD{
                     font-weight: 1000;
                     color: var(--PrimaryColor);
-                    font-size: 25px;   
+                    font-size: 18px;   
                 }
                 }
-
-                .price{
-                    font-size: 2rem;
-                    color: var(--blackColor);
-                }
+            }
+            .price{
+                font-size: 40px;
+                color: var(--blackColor);
             }
 
             .desc{
-                font-size: 13.5px;
+                font-size: 20.5px;
                 color: var(--textColor);
                 font-weight: 500;
             }

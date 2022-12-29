@@ -97,20 +97,22 @@ const Home = () => {
 
               </div>
             </div>}
+          
+            <div className="searchOptions flex">
+              <span onClick={SetSearch}>Search</span>
+              <AiOutlineSearch className="icon" />
+            </div>
 
-          <div className="searchOptions flex">
-            <span onClick={SetSearch}>Search</span>
-            <AiOutlineSearch className="icon" />
-          </div>
-
-          <div className="ResetsearchOptions flex">
-            <span onClick={ResetSetSearch}>Reset Search</span>
-            <GrPowerReset className="icon" />
-          </div>
-
+            <div className="ResetsearchOptions flex">
+              <span onClick={ResetSetSearch}>Reset Search</span>
+              <GrPowerReset className="icon" />
+            </div>
+          
         </div>
-
+        
       </div>
+
+      
     </section><Main Filters = {Filters}/></> 
     
   )

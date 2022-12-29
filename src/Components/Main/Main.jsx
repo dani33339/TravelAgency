@@ -96,20 +96,23 @@ const Main = (props) => {
               </span>
    
               <div className="fees flex">
-                 <div className="grade">
-                   <span  className="textD">Departure<small> </small> </span>
-                   <span>{des.DepartureDate}<small> </small> </span>
-                   {des.TripType==="Roudtrip"? (<><span className="textD">  To  <small> </small> </span><span>{des.ReturnDate}<small> </small> </span></>):
-                        (<><span className="textD"> </span><span>One way<small> </small> </span></>)}
-                 </div>
-                 
-                 <div className="price">
-                    
-                   <h5>{des.Price}$</h5>
-                 </div>
+                 <div className="grade ">
+
+
+                  
+                   <span  className="textD ">Departure </span>
+                   <span>{des.DepartureDate} </span>
+                   {des.TripType==="Roudtrip"? (<><span className="textD ">  To </span><span>{des.ReturnDate} </span></>):
+                        (<><span className="textD "> </span><span>One way</span></>)}   
+                 </div>  
+                  
               </div>
-   
-              <div className="desc">
+
+                <div className="price">                   
+                      <h5>{des.Price}$</h5>
+                    </div> 
+                <div className="desc">
+
                <p>Airline: {des.Description}</p>
               </div>
                  <button className='btn flex'>Order <HiClipboardList className="icon" onClick={() => Order(des)}/> </button>

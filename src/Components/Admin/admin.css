@@ -17,12 +17,12 @@
 :root .main input[type=file] {
   cursor: pointer !important;
 }
-:root .main input[type=radio] {
-  font-size: 250px;
-  font-weight: 600;
-  /* position */
-  margin-right: 6em;
-  cursor: pointer;
+:root .main .Roudtrip {
+  font-size: 15px;
+}
+:root .main .One_way {
+  font-size: 15px;
+  padding: 1rem;
 }
 :root .main .input {
   height: 40px;
@@ -220,14 +220,14 @@
 :root .main .secContent .singleDestination .cardInfo .fees .grade .textD {
   font-weight: 1000;
   color: var(--PrimaryColor);
-  font-size: 25px;
+  font-size: 18px;
 }
-:root .main .secContent .singleDestination .cardInfo .fees .price {
-  font-size: 2rem;
+:root .main .secContent .singleDestination .cardInfo .price {
+  font-size: 40px;
   color: var(--blackColor);
 }
 :root .main .secContent .singleDestination .cardInfo .desc {
-  font-size: 13.5px;
+  font-size: 20.5px;
   color: var(--textColor);
   font-weight: 500;
 }

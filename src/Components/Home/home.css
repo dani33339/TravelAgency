@@ -134,7 +134,7 @@
   padding: 5px 1rem;
   border-radius: 3rem;
   left: 50%;
-  transform: translate(-50%);
+  transform: translate(-25%);
   justify-content: center;
 }
 .home .homeContent .cardDiv .searchOptions:hover {
@@ -152,23 +152,23 @@
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
-  bottom: -0.7rem;
-  -moz-column-gap: 0.8rem;
-       column-gap: 0.8rem;
+  bottom: -0.6rem;
+  -moz-column-gap: 0.5rem;
+       column-gap: 0.5rem;
   padding: 5px 1rem;
   border-radius: 3rem;
-  right: 30%;
-  transform: translate(-50%);
+  right: 50%;
+  transform: translate(-30%);
   justify-content: center;
 }
 .home .homeContent .cardDiv .ResetsearchOptions:hover {
   background: var(--PrimaryColor);
 }
 .home .homeContent .cardDiv .ResetsearchOptions .icon {
-  font-size: 18px;
+  font-size: 14px;
 }
 .home .homeContent .cardDiv .ResetsearchOptions span {
-  font-size: 13px;
+  font-size: 10px;
 }
 .home .homeContent .homeFooterIcons {
   width: 100%;
