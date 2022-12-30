@@ -7,10 +7,6 @@ import 'aos/dist/aos.css'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../../firebase-config'
 import { useHistory } from 'react-router-dom'
-import Order from '../Order/Order'
-import {Link} from 'react-router-dom'
-
-
 
 const Main = (props) => {
   const destenationRef = collection(db,"destenation")
@@ -27,11 +23,20 @@ const Main = (props) => {
   async function fetchFlights(){
 
     const data = await getDocs(destenationRef) 
-    setDestenation(data.docs.map((doc) => (doc.data())));
+    var allDestenations=data.docs.map((doc) => (doc.data()));
+
+    var today,dd,mm,yyyy;
+    today=new Date();
+    dd=today.getDate()+1;
+    mm=today.getMonth()+1;
+    yyyy=today.getFullYear();
+    today= yyyy+"-"+mm+"-"+dd;
+
+    setDestenation(allDestenations.filter(des => new Date(des.DepartureDate) >= new Date(today)));
 
     if (props.Filters)
     {
-      var result
+        var result;
       if (props.Filters.TripType)
       {
          result = Destenation.filter(des => des.TripType===props.Filters.TripType);
@@ -41,7 +46,6 @@ const Main = (props) => {
       {
           result = result.filter(des => des.Location===props.Filters.Location);
       }
-
 
       if (props.Filters.Destination)
       {
@@ -58,7 +62,7 @@ const Main = (props) => {
           result = result.filter(des => des.ReturnDate===props.Filters.ReturnDate);
       }  
       setDestenation(result)
-    }
+    }   
   }
 
 

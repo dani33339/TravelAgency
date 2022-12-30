@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react'
+import React, {useEffect,useRef,useState} from 'react'
 import './Order.css'
 import {HiOutlineLocationMarker} from 'react-icons/hi'
 import Aos from 'aos'
@@ -9,30 +9,20 @@ import { useHistory, useLocation } from 'react-router-dom'
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 const Order = (props) => {
-  useEffect(()=>{
-    Aos.init({duration: 4000})
-  }, [])
+
 
   const { state: des } = useLocation();
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const [TicketsAmount, setTicketsAmount] = useState("1");
+  const TicketsAmountRef = useRef(); 
+
+  useEffect(()=>{
+    Aos.init({duration: 4000})
+    TicketsAmountRef.current=TicketsAmount
+  }, [TicketsAmount])
 
   let history = useHistory();
-
-
-  const options = [
-    { label: '1', value: '1' },
-    { label: '2', value: '2' },
-    { label: '3', value: '3' },
-    { label: '4', value: '4' },
-    { label: '5', value: '5' },
-    { label: '6', value: '6' },
-    { label: '7', value: '7' },
-    { label: '8', value: '8' },
-    { label: '9', value: '9' },
-    { label: '10', value: '10' },
-  ];
 
   const onChange = (event) => {
     setTicketsAmount(event.target.value);
@@ -42,15 +32,11 @@ const Order = (props) => {
     resolve => setTimeout(resolve, ms)
   );
 
-  console.log(process.env.REACT_APP_clientId);
-  console.log(process.env.REACT_APP_apiKey);
-
   const handleSubmit = async () => {
     await sleep(4000);
     const getdes = doc(db, 'destenation', des.uuid);
-    console.log(TicketsAmount)
     await updateDoc(getdes, {
-      Nseats: des.Nseats-TicketsAmount,
+      Nseats: des.Nseats-TicketsAmountRef.current,
     });
     history.push("/");
   }
@@ -95,16 +81,23 @@ const Order = (props) => {
                       <h5>Total sum: {des.Price*TicketsAmount}$</h5>
                     </div>
 
-              <div className="addItem">
-                  <label htmlFor="TripType">choose amount of tickets:</label>
-                    <div className=" flex">
-                    <select value={TicketsAmount} onChange={onChange}>
-                    {options.map((option,index) => (
-                    <option key={index} value={option.value}>{option.label}</option>
-                    ))}
-                    </select>
-                    </div>
-                </div>   
+                    <div className="addItem">
+                <label htmlFor="ticketsAmount">choose amount of tickets:</label>
+                  <div className="input flex">
+                  <select onChange={onChange}>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  </select>
+                  </div>
+              </div>  
 
                 <div className="addItem">
                   <label htmlFor="location">Enter your first name:</label>
@@ -133,7 +126,7 @@ const Order = (props) => {
                 purchase_units: [
                   {
                     amount: {
-                      value: des.Price*TicketsAmount,
+                      value: des.Price*TicketsAmountRef.current,
                     },
                   },
                 ],
@@ -142,9 +135,15 @@ const Order = (props) => {
             onApprove={async (data, actions) => {
               const details = await actions.order.capture();
               const name = details.payer.name.given_name;
-              alert("Transaction completed by " + name); 
-              
+              alert("Transaction completed by " + name + "thank you for your purchase. you are being rederect to the main page "); 
               handleSubmit();
+            }}
+            onError={()=> {
+              alert("An Error occured with your payment"); 
+            }}
+
+            onCancel={() => {
+              alert("Please make sure to finish the payment"); 
             }}
           />
         </PayPalScriptProvider>

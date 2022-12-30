@@ -133,6 +133,15 @@ const Admin = () => {
         setActive('addBar')
     }
 
+    const disableDates=()=>{
+      var today,dd,mm,yyyy;
+      today=new Date();
+      dd=today.getDate()+1;
+      mm=today.getMonth()+1;
+      yyyy=today.getFullYear();
+      return yyyy+"-"+mm+"-"+dd;
+    }
+
     return (
       <section id='main' className='main section container'>
         
@@ -190,7 +199,7 @@ const Admin = () => {
               <div className="addItem">
                 <label htmlFor="grade">Departure Date:</label>
                   <div className="input flex">
-                    <input type="date"  placeholder='Enter grade here...' value={DepartureDate} onChange={(event) => {
+                    <input type="date"  placeholder='Enter grade here...' value={DepartureDate} min={disableDates()} onChange={(event) => {
                     setDepartureDate(event.target.value);
                   }}/>
                 </div>
@@ -201,7 +210,7 @@ const Admin = () => {
               <div className="addItem">
                 <label htmlFor="grade">Return Date:</label>
                   <div className="input flex">
-                    <input type="date"  placeholder='Enter grade here...' value={ReturnDate} onChange={(event) => {
+                    <input type="date"  placeholder='Enter grade here...' value={ReturnDate} min={DepartureDate} onChange={(event) => {
                     setReturnDate(event.target.value);
                   }}/>
                 </div>
