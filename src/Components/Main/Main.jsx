@@ -119,7 +119,7 @@ const Main = (props) => {
 
                <p>Airline: {des.Description}</p>
               </div>
-                 <button className='btn flex'>Order <HiClipboardList className="icon" onClick={() => Order(des)}/> </button>
+                 <button className='btn flex'  onClick={() => Order(des)}>Order <HiClipboardList className="icon"/> </button>
                 </div>
               </div>
       

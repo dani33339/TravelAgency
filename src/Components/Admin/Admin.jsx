@@ -299,8 +299,8 @@ const Admin = () => {
                    </div>
 
                     <div id='card_btn'>
-                      <button className='btn flex'>EDIT <HiClipboardList className="icon" onClick={() => showadd(des)}/> </button>
-                      <button className='btn flex'>DELETE <HiClipboardList className="icon" onClick={() => DeleteDestenation(des.uuid)}/> </button>
+                      <button className='btn flex' onClick={() => showadd(des)}>EDIT <HiClipboardList className="icon" /> </button>
+                      <button className='btn flex' onClick={() => DeleteDestenation(des.uuid)}>DELETE <HiClipboardList className="icon" /> </button>
                     </div>
                   </div>
                 </div>

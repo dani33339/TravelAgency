@@ -98,13 +98,13 @@ const Home = () => {
               </div>
             </div>}
           
-            <div className="searchOptions flex">
-              <span onClick={SetSearch}>Search</span>
+            <div className="searchOptions flex" onClick={SetSearch}>
+              <span>Search</span>
               <AiOutlineSearch className="icon" />
             </div>
 
-            <div className="ResetsearchOptions flex">
-              <span onClick={ResetSetSearch}>Reset Search</span>
+            <div className="ResetsearchOptions flex"  onClick={ResetSetSearch}>
+              <span >Reset Search</span>
               <GrPowerReset className="icon" />
             </div>
           

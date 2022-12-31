@@ -123,6 +123,7 @@
   background: blue;
 }
 .home .homeContent .cardDiv .searchOptions {
+  cursor: pointer;
   position: absolute;
   background: var(--gradientColor);
   width: -webkit-max-content;
@@ -147,6 +148,7 @@
   font-size: 13px;
 }
 .home .homeContent .cardDiv .ResetsearchOptions {
+  cursor: pointer;
   position: absolute;
   background: var(--gradientColor);
   width: -webkit-max-content;
