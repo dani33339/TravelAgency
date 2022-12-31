@@ -25,14 +25,9 @@ const Main = (props) => {
     const data = await getDocs(destenationRef) 
     var allDestenations=data.docs.map((doc) => (doc.data()));
 
-    var today,dd,mm,yyyy;
-    today=new Date();
-    dd=today.getDate()+1;
-    mm=today.getMonth()+1;
-    yyyy=today.getFullYear();
-    today= yyyy+"-"+mm+"-"+dd;
-
-    setDestenation(allDestenations.filter(des => new Date(des.DepartureDate) >= new Date(today)));
+    var today=new Date();
+    
+    setDestenation(allDestenations.filter(des => new Date(des.DepartureDate) >=  today));
 
     if (props.Filters)
     {

@@ -63,7 +63,8 @@ const Admin = () => {
               ReturnDate : ReturnDate,
               Price: Price,
               Description: Description,
-              Nseats: Nseats
+              Nseats: Nseats,
+              reservations : [],  
             });
             console.log("flight added successfully")
             window.location.reload(false);

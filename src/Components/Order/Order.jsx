@@ -4,12 +4,12 @@ import {HiOutlineLocationMarker} from 'react-icons/hi'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { db,} from "../../firebase-config";
-import {collection, doc, updateDoc} from "firebase/firestore";
+import {collection, doc, getDoc, serverTimestamp, setDoc, updateDoc} from "firebase/firestore";
 import { useHistory, useLocation } from 'react-router-dom'
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { uid } from 'uid'
 
 const Order = (props) => {
-
 
   const { state: des } = useLocation();
   const [FirstName, setFirstName] = useState("");
@@ -38,6 +38,24 @@ const Order = (props) => {
     await updateDoc(getdes, {
       Nseats: des.Nseats-TicketsAmountRef.current,
     });
+
+    var ruid = uid();
+    await setDoc(doc(db, "reservations", ruid), {
+      FirstName :FirstName,
+      LastName :LastName,
+      TicketsAmount: TicketsAmount,
+      timeStamp: serverTimestamp(),
+      flight : des,  
+    });
+
+    // var getres = doc(db, 'reservations', ruid);
+    // console.log(getres)
+    des.reservation=[...ruid]
+    // var b=des.reservation
+    await updateDoc(getdes, {
+      reservations: des.reservation
+    });
+
     history.push("/");
   }
 
@@ -49,9 +67,7 @@ const Order = (props) => {
         </h3>
       </div>
 
-      <div className="secContent grid">
-
-                      
+      <div className="secContent grid">        
                 <div className="imageDiv">
                 <img src={des.ImageUrl} alt="" />
                 </div>
@@ -108,7 +124,7 @@ const Order = (props) => {
 
 
                 <div className="addItem">
-                  <label htmlFor="destTitle">Enter your destanation:</label>
+                  <label htmlFor="destTitle">Enter your last name:</label>
                     <div className="inputorder flex">
                       <input type="text"  placeholder='Enter last name here...'  onChange={(event) => {
                       setLastName(event.target.value);
