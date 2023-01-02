@@ -11,6 +11,7 @@ import Admin from './Components/Admin/Admin'
 import Order from './Components/Order/Order';
 import ProtectedRoute from './Permissions/ProtectedRoute';
 import { fetchUserData } from './utils/fetchLocalStorageData';
+import Myorders from './Components/Myorders/Myorders';
 
 const App = () => {
 
@@ -45,6 +46,8 @@ if (userData)
         <ProtectedRoute path="/admin" component={Admin} isAuth={adminState} />
 
         <ProtectedRoute path="/Order" component={Order} isAuth={userData} />
+
+        <ProtectedRoute path="/Myorders" component={Myorders} isAuth={userData} />
 
       </Switch>
     </div>

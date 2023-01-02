@@ -8,7 +8,7 @@ import {Link} from 'react-router-dom'
 import {
     signOut
   } from "firebase/auth";
-  import { auth } from "../../firebase-config";
+import { auth } from "../../firebase-config";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { fetchUserData } from "../../utils/fetchLocalStorageData";
@@ -63,22 +63,26 @@ const Navbar = () => {
                             <a href="admin" className="navLink">admin</a>
                         </li>}
 
-                        <li className="navItem">
+                        {/* <li className="navItem">
                             <a href="#" className="navLink">Packages</a>
-                        </li>
-
+                        </li> */}
+{/* 
                         <li className="navItem">
                             <a href="#" className="navLink">About</a>
-                        </li>
+                        </li> */}
 
                         {user ? (
-                            <>
+                            
+                            <><li className="navItem">
+                                <a href="Myorders" className="navLink">My Orders</a>
+                            </li><>
+
                             <li className="navItem">
-                            <a> Hello: {userData.FirstName}</a>
+                                <a> Hello: {userData.FirstName}</a>
                             </li>
                             <button className="btn"
                                 onClick={logout}> Log out
-                            </button></>
+                            </button></></>
                              ):(
                                 <>
                                 <button className="btn">

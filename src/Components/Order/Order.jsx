@@ -4,10 +4,13 @@ import {HiOutlineLocationMarker} from 'react-icons/hi'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { db,} from "../../firebase-config";
-import {collection, doc, getDoc, serverTimestamp, setDoc, updateDoc} from "firebase/firestore";
+import {collection, doc, getDoc, getDocs, serverTimestamp, setDoc, updateDoc} from "firebase/firestore";
 import { useHistory, useLocation } from 'react-router-dom'
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { uid } from 'uid'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from "../../firebase-config";
+
 
 const Order = (props) => {
 
@@ -15,12 +18,21 @@ const Order = (props) => {
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const [TicketsAmount, setTicketsAmount] = useState("1");
+  const [CardNumber, setCardNumber] = useState("");
+
   const TicketsAmountRef = useRef(); 
+  const FirstNameRef = useRef(); 
+  const LastNameRef = useRef(); 
+  const [user, loading] = useAuthState(auth);
+
+  const [PaymentMethod,setPaymentMethod] = useState("Credit card");
 
   useEffect(()=>{
     Aos.init({duration: 4000})
     TicketsAmountRef.current=TicketsAmount
-  }, [TicketsAmount])
+    FirstNameRef.current=FirstName;
+    LastNameRef.current=LastName;
+  }, [TicketsAmount,FirstNameRef,LastNameRef,user])
 
   let history = useHistory();
 
@@ -32,31 +44,43 @@ const Order = (props) => {
     resolve => setTimeout(resolve, ms)
   );
 
-  const handleSubmit = async () => {
-    await sleep(4000);
+  const handleSubmit = async (props) => {
+    console.log(props)
     const getdes = doc(db, 'destenation', des.uuid);
     await updateDoc(getdes, {
       Nseats: des.Nseats-TicketsAmountRef.current,
     });
 
+    var desWithoutreservations = Object.assign({}, des);
+    console.log(des)
+    delete desWithoutreservations.reservations; 
+    console.log(desWithoutreservations)
+
     var ruid = uid();
     await setDoc(doc(db, "reservations", ruid), {
-      FirstName :FirstName,
-      LastName :LastName,
-      TicketsAmount: TicketsAmount,
+      FirstName :FirstNameRef.current,
+      LastName :LastNameRef.current,
+      TicketsAmount: TicketsAmountRef.current,
       timeStamp: serverTimestamp(),
-      flight : des,  
+      flight : desWithoutreservations, 
+      Userid: user.uid
     });
 
-    // var getres = doc(db, 'reservations', ruid);
-    // console.log(getres)
-    des.reservation=[...ruid]
-    // var b=des.reservation
     await updateDoc(getdes, {
-      reservations: des.reservation
+      reservations: [...des.reservations, {"FirstName":FirstNameRef.current,"LastName":LastNameRef.current,"TicketsAmount":TicketsAmountRef.current,"ruid":ruid}]
     });
 
-    history.push("/");
+
+    const getuser = doc(db, 'users', user.uid);
+    const userData = await getDoc(getuser) 
+
+    await updateDoc(getuser, {
+      reservation: [...userData.data().reservation, ruid]
+    });
+    if (props==="card")
+      alert("Transaction completed by " + FirstName+" "+LastName + " thank you for your purchase. you are being rederect to the main page "); 
+    await sleep(1000);
+    history.push("/Myorders");
   }
 
   return (
@@ -116,7 +140,7 @@ const Order = (props) => {
               </div>  
 
                 <div className="addItem">
-                  <label htmlFor="location">Enter your first name:</label>
+                  <label htmlFor="firstname">Enter your first name:</label>
                     <div className="inputorder flex">
                       <input type="text"  placeholder='Enter first name here...' onChange={(event) => {setFirstName(event.target.value);}}/>
                   </div>
@@ -124,7 +148,7 @@ const Order = (props) => {
 
 
                 <div className="addItem">
-                  <label htmlFor="destTitle">Enter your last name:</label>
+                  <label htmlFor="lastname">Enter your last name:</label>
                     <div className="inputorder flex">
                       <input type="text"  placeholder='Enter last name here...'  onChange={(event) => {
                       setLastName(event.target.value);
@@ -132,7 +156,19 @@ const Order = (props) => {
                   </div>
                 </div> 
 
-        <div >
+                <div className="addItem">
+                <label htmlFor="payment method">Choose payment method:</label>
+                  <div className="input flex"> 
+                  Credit card
+                  <input type="radio" value="Credit card" name="Triptype" defaultChecked onChange={e=>setPaymentMethod(e.target.value)}/> 
+                  PayPal
+                  <input type="radio" value="PayPal" name="Triptype" onChange={e=>setPaymentMethod(e.target.value)}/>
+                  </div>
+              </div>   
+
+        <div >         
+          {PaymentMethod==="PayPal" ? (
+
         <PayPalScriptProvider
           options={{ "client-id": process.env.REACT_APP_clientId}}
         >
@@ -151,8 +187,8 @@ const Order = (props) => {
             onApprove={async (data, actions) => {
               const details = await actions.order.capture();
               const name = details.payer.name.given_name;
-              alert("Transaction completed by " + name + "thank you for your purchase. you are being rederect to the main page "); 
-              handleSubmit();
+              alert("Transaction completed by " + name + " thank you for your purchase. you are being rederect to the main page "); 
+              handleSubmit("paypal");
             }}
             onError={()=> {
               alert("An Error occured with your payment"); 
@@ -162,24 +198,29 @@ const Order = (props) => {
               alert("Please make sure to finish the payment"); 
             }}
           />
-        </PayPalScriptProvider>
-                </div>
-
+        </PayPalScriptProvider>):
+        (
+          <div>
+            <div className="addItem">
+            <label htmlFor="lastname">Enter your card:</label>
+              <div className="inputorder flex">
+                 <input type="text"  placeholder='Enter card'  onChange={(event) => {
+                setCardNumber(event.target.value);
+              }}/>
+             </div>
+            </div> 
           
-                {/* <button  className="btn">
-                  <a onClick={ () => {  
-                    
-                  handleSubmit();
-                    }}>Submit</a>
-                </button> */}
-
-        
-        
-
+            <button  className="btn">
+            <a onClick={ () => {  
+              
+            handleSubmit("card");
+              }}>Submit</a>
+          </button> 
+          </div>
+        )}
+                </div>              
           </div>
         </div>
-      
-     
     </section>
   )
   }
