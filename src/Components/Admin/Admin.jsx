@@ -25,6 +25,8 @@ const Admin = () => {
    const [Price, setPrice] = useState("");
    const [Description, setDescription] = useState("");
    const [Nseats, setNseats] = useState("");
+   const [Reservations, setReservations] = useState([]);
+
    //
    const [Destenation,setDestenation] = useState([]);
    const destenationRef = collection(db,"destenation")
@@ -64,7 +66,7 @@ const Admin = () => {
               Price: Price,
               Description: Description,
               Nseats: Nseats,
-              reservations : [],  
+              reservations : Reservations,  
             });
             console.log("flight added successfully")
             window.location.reload(false);
@@ -72,7 +74,6 @@ const Admin = () => {
           .catch((error) => {
             console.log(error.message, "error getting the image url");
           });
-        // setimgSrc(null);
       })
       .catch((error) => {
         console.log(error.message);
@@ -99,6 +100,7 @@ const Admin = () => {
     setPrice('');
     setDescription('');
     setNseats('');
+    setReservations([]);
     setCurrentdes(null)
   }
 
@@ -125,6 +127,10 @@ const Admin = () => {
         setPrice(des.Price);
         setDescription(des.Description);
         setNseats(des.Nseats);
+        setReservations(des.reservations);
+        console.log(des.reservations)
+        console.log(des.Reservations)
+
       }
         setActive('addBar activeaddbar')
     }
