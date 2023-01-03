@@ -13,7 +13,6 @@ const Main = (props) => {
   const [Destenation,setDestenation] = useState([]);
 
   let history = useHistory();
-
   
   useEffect(() => {
     fetchFlights();

@@ -4,7 +4,7 @@ import {HiOutlineLocationMarker} from 'react-icons/hi'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { db,} from "../../firebase-config";
-import {collection, doc, getDoc, getDocs, serverTimestamp, setDoc, updateDoc} from "firebase/firestore";
+import {doc, getDoc, serverTimestamp, setDoc, updateDoc} from "firebase/firestore";
 import { useHistory, useLocation } from 'react-router-dom'
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { uid } from 'uid'

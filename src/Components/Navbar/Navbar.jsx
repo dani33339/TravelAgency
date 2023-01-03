@@ -63,14 +63,6 @@ const Navbar = () => {
                             <a href="admin" className="navLink">admin</a>
                         </li>}
 
-                        {/* <li className="navItem">
-                            <a href="#" className="navLink">Packages</a>
-                        </li> */}
-{/* 
-                        <li className="navItem">
-                            <a href="#" className="navLink">About</a>
-                        </li> */}
-
                         {user ? (
                             
                             <><li className="navItem">
