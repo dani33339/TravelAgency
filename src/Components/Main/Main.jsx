@@ -27,7 +27,7 @@ const Main = (props) => {
 
     var today=new Date();
     
-    setDestenation(allDestenations.filter(des => new Date(des.DepartureDate) >=  today && des.Nseats > 0));
+    setDestenation(allDestenations.filter(des => new Date(des.DepartureDate) >  today && des.Nseats > 0));
 
     if (props.Filters)
     {
