@@ -101,7 +101,9 @@ const Main = (props) => {
                   
                    <span  className="textD ">Departure </span>
                    <span>{des.DepartureDate} </span>
-                   {des.TripType==="Roudtrip"? (<><span className="textD ">  To </span><span>{des.ReturnDate} </span></>):
+                   <span> at {des.DepartureTime} </span>
+
+                   {des.TripType==="Roudtrip"? (<><span className="textD ">  To </span><span>{des.ReturnDate} </span> <span> at {des.ReturnTime} </span></>):
                         (<><span className="textD "> </span><span>One way</span></>)}   
                  </div>  
                   

@@ -21,7 +21,9 @@ const Admin = () => {
    const [Destination, setDestination] = useState("");
    const [Location, setLocation] = useState("");
    const [DepartureDate, setDepartureDate] = useState("");
+   const [DepartureTime, setDepartureTime] = useState("");
    const [ReturnDate, setReturnDate] = useState("");
+   const [ReturnTime, setReturnTime] = useState("");
    const [Price, setPrice] = useState("");
    const [Description, setDescription] = useState("");
    const [Nseats, setNseats] = useState("");
@@ -62,7 +64,9 @@ const Admin = () => {
               Destination: Destination ,
               Location: Location,
               DepartureDate: DepartureDate,
-              ReturnDate : ReturnDate,
+              DepartureTime: DepartureTime,
+              ReturnDate: ReturnDate,
+              ReturnTime: ReturnTime,
               Price: Price,
               Description: Description,
               Nseats: Nseats,
@@ -95,8 +99,10 @@ const Admin = () => {
     setDestination("");
     setLocation('');
     setDepartureDate('');
+    setDepartureTime('');
     setLocation('');
     setReturnDate('');
+    setReturnTime('');
     setPrice('');
     setDescription('');
     setNseats('');
@@ -123,7 +129,9 @@ const Admin = () => {
         setDestination(des.Destination);
         setLocation(des.Location);
         setDepartureDate(des.DepartureDate);
+        setDepartureTime(des.DepartureTime);
         setReturnDate(des.ReturnDate);
+        setReturnTime(des.ReturnTime);
         setPrice(des.Price);
         setDescription(des.Description);
         setNseats(des.Nseats);
@@ -212,16 +220,32 @@ const Admin = () => {
                 </div>
               </div>
 
-              {TripType==="Roudtrip" &&
-
               <div className="addItem">
-                <label htmlFor="grade">Return Date:</label>
+                <label htmlFor="grade">Departure Time:</label>
                   <div className="input flex">
-                    <input type="date"  placeholder='Enter grade here...' value={ReturnDate} min={DepartureDate} onChange={(event) => {
-                    setReturnDate(event.target.value);
+                    <input type="time"  placeholder='Enter grade here...' value={DepartureTime} onChange={(event) => {
+                    setDepartureTime(event.target.value);
                   }}/>
                 </div>
               </div>
+
+              {TripType==="Roudtrip" &&
+
+              <><div className="addItem">
+                <label htmlFor="grade">Return Date:</label>
+                <div className="input flex">
+                  <input type="date" placeholder='Enter grade here...' value={ReturnDate} min={DepartureDate} onChange={(event) => {
+                    setReturnDate(event.target.value)
+                  } } />
+                </div>
+              </div><div className="addItem">
+                  <label htmlFor="grade">Return Time:</label>
+                  <div className="input flex">
+                    <input type="time" placeholder='Enter grade here...' value={ReturnTime} onChange={(event) => {
+                      setReturnTime(event.target.value)
+                    } } />
+                  </div>
+                </div></>
             }
 
               <div className="addItem">
@@ -291,7 +315,9 @@ const Admin = () => {
                       <div className="grade">
                         <span  className="textD">From</span>
                         <span>{des.DepartureDate}</span>
-                        {des.TripType==="Roudtrip"? (<><span className="textD">  To  </span><span>{des.ReturnDate}<small> </small> </span></>):
+                        <span> at {des.DepartureTime} </span>
+                        {des.TripType==="Roudtrip"? (<><span className="textD">  To  </span><span>{des.ReturnDate}<small> </small> </span>
+                        <span> at {des.ReturnTime} </span></>):
                         (<><span className="textD">  </span><span>One way</span></>)}
                       </div>
                      
