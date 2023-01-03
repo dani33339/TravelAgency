@@ -45,6 +45,11 @@ const Order = (props) => {
   );
 
   const handleSubmit = async (props) => {
+    if (des.Nseats-TicketsAmountRef.current<0)
+      {
+        alert("There are not enough seats on this flight only "+TicketsAmountRef.current+" left"); 
+        return
+      }
     console.log(props)
     const getdes = doc(db, 'destenation', des.uuid);
     await updateDoc(getdes, {
