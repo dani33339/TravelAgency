@@ -12,6 +12,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from "../../firebase-config";
 
 
+
 const Order = (props) => {
 
   const { state: des } = useLocation();
@@ -19,20 +20,23 @@ const Order = (props) => {
   const [LastName, setLastName] = useState("");
   const [TicketsAmount, setTicketsAmount] = useState("1");
   const [CardNumber, setCardNumber] = useState("");
-
+  const [expiry, setExpiry] = useState("");
+  const [cvc, setCvc] = useState("");
+  const [id, setid] = useState("");
   const TicketsAmountRef = useRef(); 
   const FirstNameRef = useRef(); 
   const LastNameRef = useRef(); 
   const [user, loading] = useAuthState(auth);
-
+  const [isFrontOfCardVisible, setIsFrontOfCardVisible] = useState(true);
   const [PaymentMethod,setPaymentMethod] = useState("Credit card");
-
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [cardholder, setcardholder] = useState("");
   useEffect(()=>{
     Aos.init({duration: 4000})
     TicketsAmountRef.current=TicketsAmount
     FirstNameRef.current=FirstName;
     LastNameRef.current=LastName;
-  }, [TicketsAmount,FirstNameRef,LastNameRef,user])
+  }, [TicketsAmount,FirstName,LastName,user])
 
   let history = useHistory();
 
@@ -77,10 +81,28 @@ const Order = (props) => {
     await updateDoc(getuser, {
       reservation: [...userData.data().reservation, ruid]
     });
+
     if (props==="card")
+      if(isSubscribed){
+        
+        await updateDoc(getuser, {
+          card: [...userData.data().card,{"CardNumber":CardNumber,"expiryDate":expiry,"cvc":cvc}]
+        });
+      }
       alert("Transaction completed by " + FirstName+" "+LastName + " thank you for your purchase. you are being rederect to the main page "); 
     await sleep(1000);
     history.push("/Myorders");
+  }
+
+  const ischecked = event =>{
+    
+    if (event.target.checked) {
+      console.log('✅ Checkbox is checked');
+    } else {
+      console.log('⛔️ Checkbox is NOT checked');
+    }
+    setIsSubscribed(current => !current);
+    
   }
 
   return (
@@ -142,7 +164,17 @@ const Order = (props) => {
                 <div className="addItem">
                   <label htmlFor="firstname">Enter your first name:</label>
                     <div className="inputorder flex">
-                      <input type="text"  placeholder='Enter first name here...' onChange={(event) => {setFirstName(event.target.value);}}/>
+                      <input type="text"  placeholder='Enter first name here...' onChange={(event) => {setFirstName(event.target.value);}}
+                       onKeyPress={
+                        (event) => 
+                        { 
+                          if(!(event.charCode >= 65 && event.charCode <= 90 || event.charCode >= 97 && event.charCode <= 122)){
+                            event.preventDefault();
+                          }
+    
+                          }
+                        }
+                        />
                   </div>
                 </div> 
 
@@ -152,16 +184,27 @@ const Order = (props) => {
                     <div className="inputorder flex">
                       <input type="text"  placeholder='Enter last name here...'  onChange={(event) => {
                       setLastName(event.target.value);
-                    }}/>
+                    }}
+                    onKeyPress={
+                      (event) => 
+                      { 
+                        if(!(event.charCode >= 65 && event.charCode <= 90 || event.charCode >= 97 && event.charCode <= 122)){
+                          event.preventDefault();
+                        }
+  
+                        }
+                      }
+                      />
                   </div>
                 </div> 
 
                 <div className="addItem">
                 <label htmlFor="payment method">Choose payment method:</label>
-                  <div className="input flex"> 
-                  Credit card
+                  <div className="input flex "> 
+                  <h4 id='creditcard'>Credit card</h4>
+                  
                   <input type="radio" value="Credit card" name="Triptype" defaultChecked onChange={e=>setPaymentMethod(e.target.value)}/> 
-                  PayPal
+                  <h4 id='creditcard'>PayPal</h4>
                   <input type="radio" value="PayPal" name="Triptype" onChange={e=>setPaymentMethod(e.target.value)}/>
                   </div>
               </div>   
@@ -201,27 +244,109 @@ const Order = (props) => {
         </PayPalScriptProvider>):
         (
           <div>
-            <div className="addItem">
-            <label htmlFor="lastname">Enter your card:</label>
-              <div className="inputorder flex">
-                 <input type="text"  placeholder='Enter card'  onChange={(event) => {
-                setCardNumber(event.target.value);
-              }}/>
-             </div>
-            </div> 
-          
+              <form className="card-form">
+              <div className="form-group ">
+                  <input
+                   onKeyPress={
+                    (event) => 
+                    { 
+                      if(!(event.charCode >= 65 && event.charCode <= 90 || event.charCode >= 97 && event.charCode <= 122)){
+                        event.preventDefault();
+                      }
+
+                      }
+                    }
+                    maxlength={16}
+                    type="text"
+                    className="inputorder"
+                    placeholder="Cardholder Name"
+                    value={cardholder}
+                    onChange={(e) => setcardholder(e.target.value)}
+                  />
+                  <input
+                    onKeyPress={(event) => {
+                      if (!/[0-9]/.test(event.key)) {
+                        event.preventDefault();
+                      }
+                    }}
+                    maxlength={9}
+                    type="text"                   
+                    className="inputorder"
+                    placeholder="ID"
+                    value={id}
+                    onChange={(e) => setid(e.target.value)}
+                  />
+                  <input
+                    onKeyPress={(event) => {
+                      if (!/[0-9]/.test(event.key)) {
+                        event.preventDefault();
+                      }
+                    }}
+                    type="text"
+                    maxlength={16}
+                    className="CardNumber"
+                    placeholder="Card Number"
+                    value={CardNumber}
+                    onChange={(e) => setCardNumber(e.target.value)}
+                  />
+                  <div className="expiry-and-cvc-container ">
+                    <input
+                       onKeyPress={(event) => {
+                        if (!/[0-9]/.test(event.key)) {
+                          event.preventDefault();
+                        }
+                      }}
+                      maxlength={5}
+                      datatype="DD MM"
+                      type="text"
+                      className="Date"
+                      placeholder="MM/YY"
+                      value={expiry}
+                      onChange={(e) => setExpiry(e.target.value)}
+                    />
+                    
+      
+                    <input
+                       onKeyPress={(event) => {
+                        if (!/[0-9]/.test(event.key)) {
+                          event.preventDefault();
+                        }
+                      }}
+                      maxlength={3}
+                      type="text"
+                      className="cvc"
+                      placeholder="CVC"
+                      value={cvc}
+                      
+                      onChange={(e) => setCvc(e.target.value)}
+                    />
+                    
+                  </div>
+
+                </div>   
+                <div className="savecard">SAVE CARD
+                  <input type="checkbox" id='my-checkbox' onChange={ischecked}></input>
+                  <span className="checkmark"></span>          
+                </div>
+             
+              </form>
+
+                
             <button  className="btn">
             <a onClick={ () => {  
               
             handleSubmit("card");
-              }}>Submit</a>
+              }}>Submit</a> 
           </button> 
-          </div>
+      </div>
+          
         )}
                 </div>              
           </div>
         </div>
+       
     </section>
+    
   )
   }
   

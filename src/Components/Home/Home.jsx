@@ -7,6 +7,8 @@ import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { useState } from 'react';
 import Main from '../Main/Main';
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
 
 const Home = () => {
 
@@ -15,7 +17,7 @@ const Home = () => {
   const [Destination, setDestination] = useState("");
   const [DepartureDate, setDepartureDate] = useState("");
   const [ReturnDate, setReturnDate] = useState("");
-
+  const [Price, setprice] = React.useState([100, 300]);
   const [Filters,setFilters] = useState(null);
 
   useEffect(()=>{
@@ -25,9 +27,14 @@ const Home = () => {
   
   const SetSearch = () => {
     setFilters(null); //reset old filters
-    setFilters({TripType,Location,Destination,DepartureDate,ReturnDate})
+    setFilters({TripType,Location,Destination,DepartureDate,ReturnDate,Price})
   };
+  
 
+  const handleChange = (event, newValue) => {
+    setprice(newValue);
+  };
+ 
 
   const ResetSetSearch = () => {
     setFilters(null); //reset old filters
@@ -36,6 +43,7 @@ const Home = () => {
     setDestination("");
     setDepartureDate("");
     setReturnDate("");
+    setprice([100, 300]);
   };
 
   return (
@@ -94,10 +102,24 @@ const Home = () => {
               <label htmlFor="city">Return:</label>
               <div className="input flex">
                 <input type="date" value={ReturnDate} onChange={(event) => { setReturnDate(event.target.value); } } />
-
               </div>
             </div>}
-          
+            
+            <div className="FromInput">       
+            <label>{Price[0]}$ to {Price[1]}$</label>
+              <Box sx={{ width: 400 }} className = 'priceinput flex'>              
+                <Slider
+                  min={100}
+                  step={10}
+                  max={3000}
+                  getAriaLabel={() => 'price range'}
+                  value={Price}
+                  onChange={handleChange}
+                  valueLabelDisplay="auto"   
+                />
+              </Box>
+            </div>
+
             <div className="searchOptions flex" onClick={SetSearch}>
               <span>Search</span>
               <AiOutlineSearch className="icon" />

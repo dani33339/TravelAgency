@@ -17,6 +17,8 @@
     justify-content: center;
     margin: auto;
     
+    
+
     .overlay{
         position: absolute;
         height: 100%;
@@ -78,9 +80,17 @@
                 font-weight: 500;
             }
 
-
+            .priceinput{
+                right: 4rem;
+                height: 9px;
+                padding:1rem;
+                background: var(--inputColor);
+                border-radius: 3rem;
+                
+            }
 
         .input{
+
             height: 40px;
             padding: 0 1rem;
             background: var(--inputColor);

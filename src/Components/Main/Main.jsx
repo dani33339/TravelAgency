@@ -55,7 +55,13 @@ const Main = (props) => {
       if (props.Filters.ReturnDate)
       {
           result = result.filter(des => des.ReturnDate===props.Filters.ReturnDate);
-      }  
+      }
+      
+      if(props.Filters.Price)
+      {
+        console.log(props.Filters.Price[0])
+        result = result.filter(des =>  des.Price < props.Filters.Price[1] &&  des.Price > props.Filters.Price[0]);
+      }
       setDestenation(result)
     }   
   }

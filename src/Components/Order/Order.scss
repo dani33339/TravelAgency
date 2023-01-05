@@ -13,8 +13,30 @@
 
 .main{
     width:200%;
-  
-
+      
+      .card-form {
+        display: block;
+        width: 450px;
+        margin: 1rem;
+        box-shadow: 0px 14px 80px rgb(34 35 58 / 20%);
+        padding: 25px 30px;
+        border-radius: 15px;
+        transition: all 0.3s;
+      
+      }
+      
+      .savecard{
+        margin:0.7rem; 
+        box-shadow: 0px 14px 80px rgb(34 35 58 / 20%);
+        background-color:var(--inputColor);
+        width: 7rem;
+        border-radius: 15px;
+        padding: 5px;
+        text-align:center;
+      }
+      .checkmark{
+        margin:0.1rem;
+      }
   .secContent{
     justify-content: center;
     gap: 1.5rem;
@@ -40,13 +62,34 @@
                 }
             }
         }
+        .Date{
+            height: 40px;
+            width: 6rem;
+            padding: 0 1rem;
+            background: var(--whiteColor);
+            border-radius: 3rem;
+        }
+        .cvc{
+            height: 40px;
+            width: 6rem;
+            padding: 0 1rem;
+            background: var(--whiteColor);
+            border-radius: 3rem;
+        }
+        .CardNumber{
+            height: 40px;
+            width: 25rem;
+            padding: 0 1rem;
+            background: var(--whiteColor);
+            border-radius: 3rem;
+        }
         .inputorder{
             height: 40px;
             padding: 0 1rem;
             background: var(--whiteColor);
             border-radius: 3rem;
-         
             
+         
             input{
                 background: none;
                 border: none;
@@ -57,6 +100,7 @@
                 &::placeholder{
                     font-size: 13px;
                 }
+                
             }
         }
         

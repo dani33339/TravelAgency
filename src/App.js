@@ -1,12 +1,12 @@
 
-import './App.css';
+import './app.css';
 import React from "react";
 import Navbar from './Components/Navbar/Navbar';
 import Home from './Components/Home/Home';
 import Footer from './Components/Footer/Footer';
 import {BrowserRouter as Router, Route , Switch } from 'react-router-dom';
 import Singup from './Components/Sing-up/Singup';
-import Singin from './Components/Sing-in/Singin';
+import Singin from './Components/Sing-in/singin';
 import Admin from './Components/Admin/Admin'
 import Order from './Components/Order/Order';
 import ProtectedRoute from './Permissions/ProtectedRoute';

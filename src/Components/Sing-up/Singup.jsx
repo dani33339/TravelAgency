@@ -47,7 +47,8 @@ const Singup = () => {
           birthday:birthday ,
           timeStamp: serverTimestamp(),
           userRoles,
-          reservations : [],  
+          reservations : [],
+          card :[],
         });
         const UserRef = doc(db, "users", user.user.uid);
         const data = await getDoc(UserRef);

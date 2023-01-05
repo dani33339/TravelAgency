@@ -76,6 +76,13 @@
   font-size: 13px;
   font-weight: 500;
 }
+.home .homeContent .cardDiv .priceinput {
+  right: 4rem;
+  height: 9px;
+  padding: 1rem;
+  background: var(--inputColor);
+  border-radius: 3rem;
+}
 .home .homeContent .cardDiv .input {
   height: 40px;
   padding: 0 1rem;
