@@ -4,7 +4,7 @@ import {HiOutlineLocationMarker} from 'react-icons/hi'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 import { db,} from "../../firebase-config";
-import {collection, doc, getDoc, getDocs, serverTimestamp, setDoc, updateDoc} from "firebase/firestore";
+import {doc, getDoc, serverTimestamp, setDoc, updateDoc} from "firebase/firestore";
 import { useHistory, useLocation } from 'react-router-dom'
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { uid } from 'uid'
@@ -49,6 +49,11 @@ const Order = (props) => {
   );
 
   const handleSubmit = async (props) => {
+    if (des.Nseats-TicketsAmountRef.current<0)
+      {
+        alert("There are not enough seats on this flight only "+TicketsAmountRef.current+" left"); 
+        return
+      }
     console.log(props)
     const getdes = doc(db, 'destenation', des.uuid);
     await updateDoc(getdes, {
@@ -129,7 +134,9 @@ const Order = (props) => {
                   <div className="grade">
                     <span  className="textD">Departure: </span>
                     <span>{des.DepartureDate}</span>
-                    {des.TripType==="Roudtrip"? (<><span className="textD">  To </span><span>{des.ReturnDate} </span></>):
+                    <span> at {des.DepartureTime}</span>
+                    {des.TripType==="Roudtrip"? (<><span className="textD">  To </span><span>{des.ReturnDate} </span>
+                    <span> at {des.ReturnTime}</span></>):
                           (<><span className="textD"> </span><span>One way</span></>)}
                   </div>   
                 </div>

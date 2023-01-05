@@ -1,15 +1,10 @@
 import React, {useEffect,useState} from 'react'
 import './Myorders.css'
 import {HiOutlineLocationMarker} from 'react-icons/hi'
-import {AiFillCloseCircle} from 'react-icons/ai'
-import {HiClipboardList} from 'react-icons/hi'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
-import {GrFormAdd} from 'react-icons/gr'
-import { auth, db, storage} from "../../firebase-config";
-import {collection, deleteDoc, doc,getDocs,query,setDoc, where} from "firebase/firestore";
-import {uid} from "uid";
-import {ref,uploadBytes, getDownloadURL} from "firebase/storage";
+import { auth, db} from "../../firebase-config";
+import {collection,getDocs,query, where} from "firebase/firestore";
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 const Myorders = () => {
@@ -28,27 +23,8 @@ const Myorders = () => {
 
   const fetchDestenation=async()=>{
     const q = query(collection(db, "reservations"),where("Userid", "==",user.uid))
-    // db.collection("Fruits").where("vitamins", "array-contains", "B6||potassium")
-    // firebase
-    // .firestore()
-    // .collection('Modules')
-    // .where('LessonsIDs', 'array-contains', 2)
-    //     const q=query(collection(db, "destenation"),where('reservations', 'array-contains', "a"))
-    // console.log(q)
-
-
-    // const q = query(collection(db, "destenation").where(("TripType", "==", fillters[0])
-    // .where("Location", "==", fillters[1])));
-
     const data = await getDocs(q);  
-    // console.log();
-
     setDestenation(data.docs.map((doc) => (doc.data())))
-      // const data = await getDocs(destenationRef) 
-      // var allDestenations=data.docs.map((doc) => (doc.data()));
- 
-      // setDestenation(allDestenations.filter(des => des.reservations >=  today));
-      // setDestenation(allDestenations.map(des => console.log(des.reservations)));
 
   }
 

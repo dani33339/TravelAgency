@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import './footer.css'
 import video from "../../Assets/video2.mp4";
-import {FiSend} from 'react-icons/fi'
 import {FiChevronRight} from 'react-icons/fi'
 import {AiFillYoutube} from 'react-icons/ai'
 import {AiFillInstagram} from 'react-icons/ai'
@@ -26,10 +25,6 @@ const Footer = () => {
           <small>KEEP IN TOUCH</small>
           <h2>Travel with us</h2>
         </div>
-        {/* <div className="inputDiv flex">
-          <input data-aos="fade-up" data-aos-duration="2000" type="text" placeholder='Enter Email Address' />
-          <button data-aos="fade-up" data-aos-duration="3000" className='btn flex'  type='submit'>SEND  <FiSend className="icon"/></button>
-        </div> */}
       </div>
        
        <div className="footerCard flex">
