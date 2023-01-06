@@ -145,7 +145,7 @@ const Footer = () => {
                   <FiChevronRight className="icon"/>
                   Oceania
                </li>
-           </div>
+           </div> 
          </div>
 
          <div className="footerDiv flex">

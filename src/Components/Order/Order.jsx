@@ -54,16 +54,13 @@ const Order = (props) => {
         alert("There are not enough seats on this flight only "+TicketsAmountRef.current+" left"); 
         return
       }
-    console.log(props)
     const getdes = doc(db, 'destenation', des.uuid);
     await updateDoc(getdes, {
       Nseats: des.Nseats-TicketsAmountRef.current,
     });
 
     var desWithoutreservations = Object.assign({}, des);
-    console.log(des)
     delete desWithoutreservations.reservations; 
-    console.log(desWithoutreservations)
 
     var ruid = uid();
     await setDoc(doc(db, "reservations", ruid), {
@@ -84,7 +81,7 @@ const Order = (props) => {
     const userData = await getDoc(getuser) 
 
     await updateDoc(getuser, {
-      reservation: [...userData.data().reservation, ruid]
+      reservations: [...userData.data().reservations, ruid]
     });
 
     if (props==="card")
@@ -263,7 +260,7 @@ const Order = (props) => {
 
                       }
                     }
-                    maxlength={16}
+                    maxLength ={16}
                     type="text"
                     className="inputorder"
                     placeholder="Cardholder Name"
@@ -276,7 +273,7 @@ const Order = (props) => {
                         event.preventDefault();
                       }
                     }}
-                    maxlength={9}
+                    maxLength ={9}
                     type="text"                   
                     className="inputorder"
                     placeholder="ID"
@@ -290,7 +287,7 @@ const Order = (props) => {
                       }
                     }}
                     type="text"
-                    maxlength={16}
+                    maxLength ={16}
                     className="CardNumber"
                     placeholder="Card Number"
                     value={CardNumber}
@@ -303,7 +300,7 @@ const Order = (props) => {
                           event.preventDefault();
                         }
                       }}
-                      maxlength={5}
+                      maxLength ={5}
                       datatype="DD MM"
                       type="text"
                       className="Date"
@@ -319,7 +316,7 @@ const Order = (props) => {
                           event.preventDefault();
                         }
                       }}
-                      maxlength={3}
+                      maxLength ={3}
                       type="text"
                       className="cvc"
                       placeholder="CVC"

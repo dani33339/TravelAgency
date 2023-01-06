@@ -17,7 +17,7 @@ const Home = () => {
   const [Destination, setDestination] = useState("");
   const [DepartureDate, setDepartureDate] = useState("");
   const [ReturnDate, setReturnDate] = useState("");
-  const [Price, setprice] = React.useState([100, 300]);
+  const [Price, setprice] = React.useState([0, 400]);
   const [Filters,setFilters] = useState(null);
 
   useEffect(()=>{
@@ -43,7 +43,7 @@ const Home = () => {
     setDestination("");
     setDepartureDate("");
     setReturnDate("");
-    setprice([100, 300]);
+    setprice([0, 400]);
   };
 
   return (
@@ -109,7 +109,7 @@ const Home = () => {
             <label>{Price[0]}$ to {Price[1]}$</label>
               <Box sx={{ width: 400 }} className = 'priceinput flex'>              
                 <Slider
-                  min={100}
+                  min={0}
                   step={10}
                   max={3000}
                   getAriaLabel={() => 'price range'}

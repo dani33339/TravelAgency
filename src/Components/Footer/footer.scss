@@ -73,37 +73,6 @@
                 }
             }
 
-            // place for email holder
-            // .inputDiv{
-            //     width: 100%;
-            //     gap: 1rem;
-            //     flex-direction: column;
-            //     input{
-            //         width: 100%;
-            //       padding: .5rem .6rem;
-            //       border-radius: 3rem;
-            //       border: 1px solid var(--whiteColor);
-            //       outline: none;
-            //       background: transparent;
-            //       color: var(--whiteColor);
-            //       &::placeholder{
-            //         color: var(--whiteColor);
-            //         opacity: .5;
-            //       }
-                   
-            //     }
-
-                // .btn{
-                //     width: 100%; //at a wider screen, width will be max-content.
-                //     justify-content: center;
-                //     color: var(--whiteColor);
-                //     font-weight: 500;
-                //     gap: .5rem;
-                //     .icon{
-                //         font-size: 18px;
-                //     }
-                // }
-            // }
         }
 
         .footerCard{
@@ -246,18 +215,6 @@
                 flex-direction: row;
                 justify-content: space-between;
 
-                // .inputDiv{
-                //     width: max-content;
-                //     flex-direction: row;
-                //    justify-content: flex-end;
-                //     input{
-                //       width: 60%;
-                //     }
-    
-                //     .btn{
-                //         width: max-content;
-                //     }
-                // }
             }
         }
 

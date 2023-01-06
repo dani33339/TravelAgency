@@ -136,9 +136,6 @@ const Admin = () => {
         setDescription(des.Description);
         setNseats(des.Nseats);
         setReservations(des.reservations);
-        console.log(des.reservations)
-        console.log(des.Reservations)
-
       }
         setActive('addBar activeaddbar')
     }
