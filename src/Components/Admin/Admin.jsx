@@ -73,6 +73,7 @@ const Admin = () => {
               reservations : Reservations,  
             });
             console.log("flight added successfully")
+            alert("flight added successfully"); 
             window.location.reload(false);
          })
           .catch((error) => {
@@ -80,6 +81,7 @@ const Admin = () => {
           });
       })
       .catch((error) => {
+        alert("Error somthing went wrong please try again"); 
         console.log(error.message);
       });
   };

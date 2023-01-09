@@ -57,7 +57,7 @@ const Singup = () => {
         window.location.reload(false);
     } catch (error) {
       console.log(error.message);
-      <h4>somthing went wrong please try again</h4>
+      alert("Error somthing went wrong please try again  "+" "+error.message); 
     }
   };
 

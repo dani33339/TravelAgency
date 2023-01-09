@@ -7,7 +7,8 @@ function ProtectedRoute({ isAuth: IsAuth, component: Component}) {
             render={(props) => {
                 if (IsAuth){
                 return <Component />;
-            } else {
+            } else {  
+                alert("You don't have authorization to view this page please log in"); 
             return (
                 <Redirect to = {{pathname:"/", state: {from: props.location} }}/>
             );

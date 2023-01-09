@@ -13,7 +13,6 @@ const Myorders = () => {
    }, [])
 
    const [Destenation,setDestenation] = useState([]);
-   const destenationRef = collection(db,"destenation")
    const [user, loading] = useAuthState(auth);
 
 
@@ -60,7 +59,10 @@ const Myorders = () => {
                       <div className="grade">
                         <span  className="textD">From</span>
                         <span>{res.flight.DepartureDate}</span>
-                        {res.flight.TripType==="Roudtrip"? (<><span className="textD">  To  </span><span>{res.flight.ReturnDate}<small> </small> </span></>):
+                        <span> at {res.flight.DepartureTime} </span>
+
+                        {res.flight.TripType==="Roudtrip"? (<><span className="textD ">  To </span><span>{res.flight.ReturnDate} </span> <span> at {res.flight.ReturnTime} </span></>):
+
                         (<><span className="textD">  </span><span>One way</span></>)}
                       </div>
                      

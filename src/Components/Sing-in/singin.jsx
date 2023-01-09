@@ -45,6 +45,7 @@ const Singin = () => {
 
     } catch (error) {
         console.log(error.message);
+        alert("Error somthing went wrong please try again"+error.message); 
         snackbarRef.current.show();
     }
     };
