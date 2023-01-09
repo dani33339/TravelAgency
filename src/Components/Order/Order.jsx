@@ -20,23 +20,55 @@ const Order = (props) => {
   const [LastName, setLastName] = useState("");
   const [TicketsAmount, setTicketsAmount] = useState("1");
   const [CardNumber, setCardNumber] = useState("");
-  const [expiry, setExpiry] = useState("");
-  const [cvc, setCvc] = useState("");
-  const [id, setid] = useState("");
+  const [ExpiryDate, setExpiryDate] = useState("");
+  const [Cvc, setCvc] = useState("");
+  const [Id, setId] = useState("");
   const TicketsAmountRef = useRef(); 
   const FirstNameRef = useRef(); 
   const LastNameRef = useRef(); 
   const [user, loading] = useAuthState(auth);
-  const [isFrontOfCardVisible, setIsFrontOfCardVisible] = useState(true);
   const [PaymentMethod,setPaymentMethod] = useState("Credit card");
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const [cardholder, setcardholder] = useState("");
+  const [CardHolder, setcardholder] = useState("");
+  const [userData, setuserData] = useState("");
+  const [OldCard, setOldCard] = useState(true);
+
+  
   useEffect(()=>{
     Aos.init({duration: 4000})
     TicketsAmountRef.current=TicketsAmount
     FirstNameRef.current=FirstName;
     LastNameRef.current=LastName;
-  }, [TicketsAmount,FirstName,LastName,user])
+
+    func();
+
+  }, [TicketsAmount,FirstName,LastName,user,userData])
+
+  async function func(){
+    if(user)
+    {
+      const getuser = doc(db, 'users', user.uid);
+      const data = await getDoc(getuser) 
+      // const userData = await getDoc(getuser) 
+
+      setuserData(data.data());
+      if (userData && userData.card) {
+     
+      if(userData.card.length > 0)
+      {
+        if (OldCard)
+        {
+        const LastCardData=userData.card.slice(-1)[0];
+        setcardholder(LastCardData.CardHolder)
+        setCardNumber(LastCardData.CardNumber)
+        setExpiryDate(LastCardData.ExpiryDate)
+        setCvc(LastCardData.Cvc)
+        setId(LastCardData.Id)
+        }
+      }
+    }
+   }
+  }
 
   let history = useHistory();
 
@@ -54,6 +86,19 @@ const Order = (props) => {
         alert("There are not enough seats on this flight only "+TicketsAmountRef.current+" left"); 
         return
       }
+
+    if (!FirstName || !LastName)
+    {
+      alert("Please fill all the deatails"); 
+      return
+    }
+
+    if (props==="card" && (!CardHolder || !CardNumber ||!Id || !ExpiryDate || !Cvc ))
+    {
+      alert("Please Fill all the deatails"); 
+      return
+    }
+
     const getdes = doc(db, 'destenation', des.uuid);
     await updateDoc(getdes, {
       Nseats: des.Nseats-TicketsAmountRef.current,
@@ -88,7 +133,7 @@ const Order = (props) => {
       if(isSubscribed){
         
         await updateDoc(getuser, {
-          card: [...userData.data().card,{"CardNumber":CardNumber,"expiryDate":expiry,"cvc":cvc}]
+          card: [...userData.data().card,{"CardHolder":CardHolder,"Id":Id,"CardNumber":CardNumber,"ExpiryDate":ExpiryDate,"Cvc":Cvc}]
         });
       }
       alert("Transaction completed by " + FirstName+" "+LastName + " thank you for your purchase. you are being rederect to the main page "); 
@@ -264,8 +309,11 @@ const Order = (props) => {
                     type="text"
                     className="inputorder"
                     placeholder="Cardholder Name"
-                    value={cardholder}
-                    onChange={(e) => setcardholder(e.target.value)}
+                    value={CardHolder}
+                    onChange={(e) => {
+                      setcardholder(e.target.value);
+                      setOldCard(false);
+                    }}
                   />
                   <input
                     onKeyPress={(event) => {
@@ -277,8 +325,11 @@ const Order = (props) => {
                     type="text"                   
                     className="inputorder"
                     placeholder="ID"
-                    value={id}
-                    onChange={(e) => setid(e.target.value)}
+                    value={Id}
+                    onChange={(e) => {
+                      setId(e.target.value)
+                      setOldCard(false);
+                    }}
                   />
                   <input
                     onKeyPress={(event) => {
@@ -291,8 +342,10 @@ const Order = (props) => {
                     className="CardNumber"
                     placeholder="Card Number"
                     value={CardNumber}
-                    onChange={(e) => setCardNumber(e.target.value)}
-                  />
+                    onChange={(e) => {
+                      setCardNumber(e.target.value);
+                      setOldCard(false);
+                    }}                  />
                   <div className="expiry-and-cvc-container ">
                     <input
                        onKeyPress={(event) => {
@@ -305,8 +358,11 @@ const Order = (props) => {
                       type="text"
                       className="Date"
                       placeholder="MM/YY"
-                      value={expiry}
-                      onChange={(e) => setExpiry(e.target.value)}
+                      value={ExpiryDate}
+                      onChange={(e) => {
+                        setExpiryDate(e.target.value)
+                        setOldCard(false);
+                      }}
                     />
                     
       
@@ -320,9 +376,12 @@ const Order = (props) => {
                       type="text"
                       className="cvc"
                       placeholder="CVC"
-                      value={cvc}
+                      value={Cvc}
                       
-                      onChange={(e) => setCvc(e.target.value)}
+                      onChange={(e) =>{
+                         setCvc(e.target.value);
+                         setOldCard(false);
+                      }}
                     />
                     
                   </div>
