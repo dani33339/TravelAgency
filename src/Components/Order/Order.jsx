@@ -49,7 +49,6 @@ const Order = (props) => {
     {
       const getuser = doc(db, 'users', user.uid);
       const data = await getDoc(getuser) 
-      // const userData = await getDoc(getuser) 
 
       setuserData(data.data());
       if (userData && userData.card) {
