@@ -15,9 +15,9 @@ you can install them via npm install
 for example: npm i react
 
 ├── @emotion/react@11.10.5
-├── @emotion/styled@11.10.5
-├── @mui/material@5.11.3
-├── @mui/x-date-pickers@5.0.13
+/n├── @emotion/styled@11.10.5
+/n├── @mui/material@5.11.3
+/n├── @mui/x-date-pickers@5.0.13
 ├── @paypal/react-paypal-js@7.8.2
 ├── @testing-library/jest-dom@5.16.5
 ├── @testing-library/react@13.4.0
