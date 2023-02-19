@@ -1,4 +1,4 @@
-A travel agency websiteת
+A Travel Agency website
 users can order flights and pay with paypal.
 Admin can add flights.
 Project made with react and Firebase for the db and auth.
