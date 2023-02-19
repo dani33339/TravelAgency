@@ -86,7 +86,7 @@ const Order = (props) => {
         return
       }
 
-    if (!FirstName || !LastName)
+    if (!FirstNameRef.current || !LastNameRef.current)
     {
       alert("Please fill all the deatails"); 
       return
