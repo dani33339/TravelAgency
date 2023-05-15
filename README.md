@@ -4,7 +4,7 @@ Admin can add flights.
 Project made with react and Firebase for the db and auth.
 
 Website demo:
-https://thriving-cannoli-14cdb0.netlify.app/
+https://exquisite-sherbet-444048.netlify.app/
 
 ![image](https://user-images.githubusercontent.com/93151766/219940050-91858167-d6f4-4ca7-a276-c68615baff61.png)
 ![image](https://user-images.githubusercontent.com/93151766/219940071-083d79df-70a4-4e6c-b245-96c63d572fb9.png)
