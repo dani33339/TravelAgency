@@ -5,7 +5,7 @@ import Navbar from './Components/Navbar/Navbar';
 import Home from './Components/Home/Home';
 import Footer from './Components/Footer/Footer';
 import {BrowserRouter as Router, Route , Switch } from 'react-router-dom';
-import Singup from './Components/Sign-up/Signup';
+import Singup from './Components/Sign-up/signup';
 import Singin from './Components/Sign-in/Signin';
 import Admin from './Components/Admin/Admin'
 import Order from './Components/Order/Order';
