@@ -16,7 +16,6 @@
 }
 :root .main .secTitle .title {
   position: relative;
-  width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
   color: var(--textColor);

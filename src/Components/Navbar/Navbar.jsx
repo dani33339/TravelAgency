@@ -2,7 +2,7 @@ import './navbar.css'
 import { MdAirplaneTicket } from "react-icons/md"
 import { AiFillCloseCircle } from "react-icons/ai"
 import { TbGridDots } from "react-icons/tb"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom'
 
 import {
@@ -28,11 +28,23 @@ const Navbar = () => {
         setActive('navBar')
     }
     const [user, loading] = useAuthState(auth);
+    const [userData, setUserData] = useState(null);
 
 
-    var userData=null;
-    if (user)
-        userData = fetchUserData();
+    useEffect(() => {
+        const fetchData = async () => {
+            if (user) {
+                try {
+                    const data = await fetchUserData();
+                    setUserData(data);
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        };
+
+        fetchData();
+    }, [user]);
 
 
     const logout = async () => {
@@ -58,12 +70,12 @@ const Navbar = () => {
                         <a href="/" className="navLink">Home</a>
                         </li>
                         
-                        {user && userData.userRoles.includes('admin') &&
+                        {user && userData && userData.userRoles.includes('admin') &&
                         <li className="navItem">
                             <a href="admin" className="navLink">admin</a>
                         </li>}
 
-                        {user ? (
+                        {user && userData? (
                             
                             <><li className="navItem">
                                 <a href="Myorders" className="navLink">My Orders</a>
@@ -78,11 +90,11 @@ const Navbar = () => {
                              ):(
                                 <>
                                 <button className="btn">
-                                <Link to="/Sing-in">Sing-in</Link>
+                                <Link to="/Sign-in">Sign-in</Link>
                             </button>
     
                             <button className="btn">
-                                <Link to="/Sing-up">Sing-up</Link>
+                                <Link to="/Sign-up">Sign-up</Link>
                             </button></>
                             )}
 

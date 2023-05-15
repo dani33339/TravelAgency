@@ -5,8 +5,8 @@ import Navbar from './Components/Navbar/Navbar';
 import Home from './Components/Home/Home';
 import Footer from './Components/Footer/Footer';
 import {BrowserRouter as Router, Route , Switch } from 'react-router-dom';
-import Singup from './Components/Sing-up/Singup';
-import Singin from './Components/Sing-in/Singin';
+import Singup from './Components/Sign-up/Signup';
+import Singin from './Components/Sign-in/Signin';
 import Admin from './Components/Admin/Admin'
 import Order from './Components/Order/Order';
 import ProtectedRoute from './Permissions/ProtectedRoute';
@@ -35,11 +35,11 @@ if (userData)
           <Home/>       
         </Route>
 
-        <Route path="/Sing-up">
+        <Route path="/Sign-up">
           <Singup/>
         </Route>
 
-        <Route path="/Sing-in">
+        <Route path="/Sign-in">
           <Singin/>
         </Route>
 
