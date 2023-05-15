@@ -51,17 +51,17 @@ const Singin = () => {
     };
 
   return (
-    <section id='Sing-in' className='Sing-in'>
+    <section id='Sign-in' className='Sign-in'>
       <div className="overlay"></div>
       <video src={video} autoPlay loop muted type="video/mp4"></video>
 
-      <div data-aos="fade-down" className="Sing-inContent container">
+      <div data-aos="fade-down" className="Sign-inContent container">
         <div className="textDiv">
         <span  className="smallText">
-          Sing-in Page
+        Sign-in Page
         </span>
-        <h1 data-aos="fade-down" className="Sing-inTitle">
-          Sing in
+        <h1 data-aos="fade-down" className="Sign-inTitle">
+        Sign in
         </h1>
         </div>
 

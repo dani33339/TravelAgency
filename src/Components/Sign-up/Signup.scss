@@ -11,7 +11,7 @@
 }
 
 
-.Sing-up{
+.Sign-up{
     width: 100%;
     position: relative;
     display: flex;
@@ -39,7 +39,7 @@
         object-fit: cover;
     }
 
-    .Sing-upContent{
+    .Sign-upContent{
         width: 100%;
         height: max-content;
         padding: 8rem 1.5rem 3rem;
@@ -59,7 +59,7 @@
             text-transform: uppercase;
         } 
 
-        .Sing-upTitle{
+        .Sign-upTitle{
             position: relative;
             font-size: 1.8rem;
         }
@@ -256,14 +256,14 @@
 
 //MEDIA QUERIES ==========================================>
 @media screen and (min-width: 500px){
-   .Sing-up{
-        .Sing-upContent{
+   .Sign-up{
+        .Sign-upContent{
             .textDiv{
                 .smallText{
                     font-size: 16px;
                 } 
     
-                .Sing-upTitle{
+                .Sign-upTitle{
                     position: relative;
                     font-size: 2.3rem;
                     width: max-content;
@@ -291,8 +291,8 @@
 }
 
 @media screen and (min-width: 660px) {
-    .Sing-up{
-        .Sing-upContent{
+    .Sign-up{
+        .Sign-upContent{
             .cardDiv{
                 padding: 2rem 1rem;
                 grid-template-columns: repeat(3,1fr);
@@ -303,15 +303,15 @@
 
 
 @media screen and (min-width: 940px){
-   .Sing-up{
+   .Sign-up{
         height: 70vh;
     }
 }
 
 @media screen and (min-width: 1024px){
-    .Sing-up{
+    .Sign-up{
         height: 80vh;
-        .Sing-upContent{
+        .Sign-upContent{
             padding-left: 0;
             padding-right: 0;
             .cardDiv{

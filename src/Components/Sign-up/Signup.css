@@ -10,7 +10,7 @@
   --inputColor: rgb(239, 239, 239);
 }
 
-.Sing-up {
+.Sign-up {
   width: 100%;
   position: relative;
   display: flex;
@@ -18,7 +18,7 @@
   justify-content: center;
   margin: auto;
 }
-.Sing-up .overlay {
+.Sign-up .overlay {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -28,7 +28,7 @@
   bottom: 0;
   z-index: 1;
 }
-.Sing-up video {
+.Sign-up video {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -37,7 +37,7 @@
   -o-object-fit: cover;
      object-fit: cover;
 }
-.Sing-up .Sing-upContent {
+.Sign-up .Sign-upContent {
   width: 100%;
   height: -moz-max-content;
   height: max-content;
@@ -51,47 +51,47 @@
   color: var(--whiteColor);
   z-index: 100;
 }
-.Sing-up .Sing-upContent .textDiv {
+.Sign-up .Sign-upContent .textDiv {
   padding: 2rem e0;
 }
-.Sing-up .Sing-upContent .textDiv .smallText {
+.Sign-up .Sign-upContent .textDiv .smallText {
   font-size: 13px;
   text-transform: uppercase;
 }
-.Sing-up .Sing-upContent .textDiv .Sing-upTitle {
+.Sign-up .Sign-upContent .textDiv .Sign-upTitle {
   position: relative;
   font-size: 1.8rem;
 }
-.Sing-up .Sing-upContent .cardDiv {
+.Sign-up .Sign-upContent .cardDiv {
   position: relative;
   padding: 2rem 1rem;
   background: var(--whiteColor);
   border-radius: 10px;
   gap: 1rem;
 }
-.Sing-up .Sing-upContent .cardDiv label {
+.Sign-up .Sign-upContent .cardDiv label {
   display: block;
   color: var(--textColor);
   padding-bottom: 10px;
   font-size: 13px;
   font-weight: 500;
 }
-.Sing-up .Sing-upContent .cardDiv price range .label_total {
+.Sign-up .Sign-upContent .cardDiv price range .label_total {
   justify-content: space-between;
   align-items: center;
 }
-.Sing-up .Sing-upContent .cardDiv price range .label_total .total {
+.Sign-up .Sign-upContent .cardDiv price range .label_total .total {
   color: var(--textColor);
   font-size: 18px;
   padding-bottom: 10px;
 }
-.Sing-up .Sing-upContent .cardDiv .input {
+.Sign-up .Sign-upContent .cardDiv .input {
   height: 40px;
   padding: 0 1rem;
   background: var(--inputColor);
   border-radius: 3rem;
 }
-.Sing-up .Sing-upContent .cardDiv .input input {
+.Sign-up .Sign-upContent .cardDiv .input input {
   background: none;
   border: none;
   outline: none;
@@ -99,21 +99,21 @@
   font-size: 13px;
   font-weight: 500;
 }
-.Sing-up .Sing-upContent .cardDiv .input input::-moz-placeholder {
+.Sign-up .Sign-upContent .cardDiv .input input::-moz-placeholder {
   font-size: 13px;
 }
-.Sing-up .Sing-upContent .cardDiv .input input::placeholder {
+.Sign-up .Sign-upContent .cardDiv .input input::placeholder {
   font-size: 13px;
 }
-.Sing-up .Sing-upContent .cardDiv .input .icon {
+.Sign-up .Sign-upContent .cardDiv .input .icon {
   font-size: 18px;
   color: var(--PrimaryColor) !important;
   margin-left: 10px;
 }
-.Sing-up .Sing-upContent .cardDiv .input input[type=range] {
+.Sign-up .Sign-upContent .cardDiv .input input[type=range] {
   background: blue;
 }
-.Sing-up .Sing-upContent .cardDiv .submit {
+.Sign-up .Sign-upContent .cardDiv .submit {
   position: absolute;
   background: var(--gradientColor);
   width: -moz-max-content;
@@ -127,58 +127,58 @@
   transform: translate(-50%);
   justify-content: center;
 }
-.Sing-up .Sing-upContent .cardDiv .submit:hover {
+.Sign-up .Sign-upContent .cardDiv .submit:hover {
   background: var(--PrimaryColor);
 }
-.Sing-up .Sing-upContent .cardDiv .submit .icon {
+.Sign-up .Sign-upContent .cardDiv .submit .icon {
   font-size: 18px;
 }
-.Sing-up .Sing-upContent .cardDiv .submit span {
+.Sign-up .Sign-upContent .cardDiv .submit span {
   font-size: 13px;
 }
-.Sing-up .Sing-upContent .homeFooterIcons {
+.Sign-up .Sign-upContent .homeFooterIcons {
   width: 100%;
   justify-content: space-between;
 }
-.Sing-up .Sing-upContent .homeFooterIcons .icon {
+.Sign-up .Sign-upContent .homeFooterIcons .icon {
   font-size: 20px;
   margin: 0 5px;
   color: var(--whiteColor);
   font-weight: 600;
 }
-.Sing-up .Sing-upContent .homeFooterIcons .icon:hover {
+.Sign-up .Sign-upContent .homeFooterIcons .icon:hover {
   color: var(--PrimaryColor);
 }
-.Sing-up .Sing-upContent .cardDiv {
+.Sign-up .Sign-upContent .cardDiv {
   position: relative;
   padding: 2rem 1rem;
   background: var(--whiteColor);
   border-radius: 10px;
   gap: 1rem;
 }
-.Sing-up .Sing-upContent .cardDiv Label {
+.Sign-up .Sign-upContent .cardDiv Label {
   display: block;
   color: var(--textColor);
   padding-bottom: 10px;
   font-size: 13px;
   font-weight: 500;
 }
-.Sing-up .Sing-upContent .cardDiv .label_total {
+.Sign-up .Sign-upContent .cardDiv .label_total {
   justify-content: space-between;
   align-items: center;
 }
-.Sing-up .Sing-upContent .cardDiv .label_total .total {
+.Sign-up .Sign-upContent .cardDiv .label_total .total {
   color: var(--textColor);
   font-size: 18px;
   padding-bottom: 10px;
 }
-.Sing-up .Sing-upContent .cardDiv .input {
+.Sign-up .Sign-upContent .cardDiv .input {
   height: 40px;
   padding: 0 1rem;
   background: var(--inputColor);
   border-radius: 3rem;
 }
-.Sing-up .Sing-upContent .cardDiv .input input {
+.Sign-up .Sign-upContent .cardDiv .input input {
   background: none;
   border: none;
   outline: none;
@@ -186,21 +186,21 @@
   font-size: 13px;
   font-weight: 500;
 }
-.Sing-up .Sing-upContent .cardDiv .input input::-moz-placeholder {
+.Sign-up .Sign-upContent .cardDiv .input input::-moz-placeholder {
   font-size: 13px;
 }
-.Sing-up .Sing-upContent .cardDiv .input input::placeholder {
+.Sign-up .Sign-upContent .cardDiv .input input::placeholder {
   font-size: 13px;
 }
-.Sing-up .Sing-upContent .cardDiv .input .icon {
+.Sign-up .Sign-upContent .cardDiv .input .icon {
   font-size: 18px;
   color: var(--PrimaryColor) !important;
   margin-left: 10px;
 }
-.Sing-up .Sing-upContent .cardDiv .input .input[type=range] {
+.Sign-up .Sign-upContent .cardDiv .input .input[type=range] {
   background: blue;
 }
-.Sing-up .Sing-upContent .cardDiv .submit {
+.Sign-up .Sign-upContent .cardDiv .submit {
   position: absolute;
   background: var(--gradientColor);
   width: -moz-max-content;
@@ -215,27 +215,27 @@
   justify-content: center;
   cursor: pointer;
 }
-.Sing-up .Sing-upContent .cardDiv .submithover {
+.Sign-up .Sign-upContent .cardDiv .submithover {
   background: var(--PrimaryColor);
 }
-.Sing-up .Sing-upContent .cardDiv .submit .icon {
+.Sign-up .Sign-upContent .cardDiv .submit .icon {
   font-size: 18px;
 }
-.Sing-up .Sing-upContent .cardDiv .submit span {
+.Sign-up .Sign-upContent .cardDiv .submit span {
   font-size: 13px;
 }
 
 @media screen and (min-width: 500px) {
-  .Sing-up .Sing-upContent .textDiv .smallText {
+  .Sign-up .Sign-upContent .textDiv .smallText {
     font-size: 16px;
   }
-  .Sing-up .Sing-upContent .textDiv .Sing-upTitle {
+  .Sign-up .Sign-upContent .textDiv .Sign-upTitle {
     position: relative;
     font-size: 2.3rem;
     width: -moz-max-content;
     width: max-content;
   }
-  .Sing-up .Sing-upContent .textDiv .Sing-upTitle::after {
+  .Sign-up .Sign-upContent .textDiv .Sign-upTitle::after {
     position: absolute;
     content: "";
     background: var(--SecondaryColor);
@@ -245,30 +245,30 @@
     bottom: 5px;
     z-index: -1;
   }
-  .Sing-up .Sing-upContent .cardDiv {
+  .Sign-up .Sign-upContent .cardDiv {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media screen and (min-width: 660px) {
-  .Sing-up .Sing-upContent .cardDiv {
+  .Sign-up .Sign-upContent .cardDiv {
     padding: 2rem 1rem;
     grid-template-columns: repeat(3, 1fr);
   }
 }
 @media screen and (min-width: 940px) {
-  .Sing-up {
+  .Sign-up {
     height: 70vh;
   }
 }
 @media screen and (min-width: 1024px) {
-  .Sing-up {
+  .Sign-up {
     height: 80vh;
   }
-  .Sing-up .Sing-upContent {
+  .Sign-up .Sign-upContent {
     padding-left: 0;
     padding-right: 0;
   }
-  .Sing-up .Sing-upContent .cardDiv {
+  .Sign-up .Sign-upContent .cardDiv {
     padding: 2rem 1rem;
     grid-template-columns: repeat(3, 1fr);
   }
